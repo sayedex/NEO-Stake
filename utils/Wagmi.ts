@@ -28,6 +28,7 @@ const chains = [polygonMumbai];
 export const client = createClient(
     getDefaultClient({
       appName: "minter",
+      appIcon: "https://family.co/logo.png", // your app's icon, no bigger than 1024x1024px (max. 1MB)
       alchemyId,
       chains
     }),

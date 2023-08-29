@@ -6,7 +6,7 @@ import store from "../store/store";
 import { Provider } from "react-redux";
 import Layout from "../Layout/layout";
 import toast, { Toaster } from "react-hot-toast";
-import { WagmiConfig, } from "wagmi";
+import { WagmiConfig, createClient, configureChains, mainnet } from "wagmi";
 import {
   ConnectKitProvider,
   ConnectKitButton,
@@ -20,16 +20,15 @@ export default function App({ Component, pageProps }: AppProps) {
 
 
         <Toaster />
-
-        <Provider store={store}>
         <ConnectKitProvider>
+        <Provider store={store}>
+    
   
           <Layout>
             <Component {...pageProps} />
           </Layout>
-          </ConnectKitProvider>
         </Provider>
-
+        </ConnectKitProvider>
       </WagmiConfig>
 
     // </ThemeProvider>

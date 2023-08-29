@@ -10,7 +10,7 @@ export default function Document() {
       <body>
 
         <title>      NEO Staking</title>
-        <meta name="description" content="Zombabies" />
+        <meta name="description" content="NEO" />
         <Main />
         <NextScript />
       </body>
