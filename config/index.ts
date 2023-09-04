@@ -5,8 +5,8 @@ export const pools: Pool[] = [
     name: "GEN 1 POOL",
     header: "For 1-5x Holders",
     rate: "0",
-    contract:"0xD1ADA606bCa5253c475cEb050a17bF7d9C5C6458",
-    nftcontract: "0xd0bd375a43b58fd8329980898802667a64623f60",
+    contract:"0x6eeFdd781Cef85847F696c0BeD22E0475B265bA6",
+    nftcontract: "0x130471fE74F2d7d305AefC93DF837Af81Cd87237",
     totaldeposit: 0,
     yourdeposit: 0,
     unclaimed: "0",
@@ -15,56 +15,7 @@ export const pools: Pool[] = [
     min:0,
     max:0,
   },
-  { id:0,
-    name: "GEN 2 POOL",
-    header: "For 1-5x Holders",
-    rate: "0",
-    type:" 1-5x ",
-    typeimg:"/pool/bronze.png",
-    contract:"0x719c1Bb8835912B640708BE4A0D85058F24A340A",
-    nftcontract: "0x8ee54067dbb58d872424050234df6162aa27c06d",
-    totaldeposit: 0,
-    yourdeposit: 0,
-    unclaimed: "0",
-    limit:true,
-    headerIMG:"/pool/bronze1.png",
-    min:1,
-    max:5,
-  },
-  { id:0,
-    name: "GEN 2 POOL",
-    header: "For 6-15x Holders",
-    rate: "0",
-    type:" 6-15x ",
-    typeimg:"/pool/silver.png",
-    contract:"0xEE870888d2a988023D73D72077849e8504a442cb",
-    nftcontract: "0x8ee54067dbb58d872424050234df6162aa27c06d",
-    totaldeposit: 0,
-    yourdeposit: 0,
-    unclaimed: "0",
-    limit:true,
-    headerIMG:"/pool/silver1.png",
-    min:6,
-    max:15,
-  },
-  { id:0,
-    name: "GEN 2 POOL",
-    header: "For 16-39x Holders",
-    rate: "0",
-    type:" 16-39x ",
-    typeimg:"/pool/gold.png",
-    contract:"0x5680130D987fD1E9ca1600459a9309999F823828",
-    nftcontract: "0x8ee54067dbb58d872424050234df6162aa27c06d",
-    totaldeposit: 0,
-    yourdeposit: 0,
-    unclaimed: "0",
-    limit:true,
-    headerIMG:"/pool/gold1.png",
-     min:16,
-     max:39,
-
-  },
-
+  
   // Add more pool objects as needed
 ];
 
@@ -84,14 +35,10 @@ export const pools: Pool[] = [
 
 export const NFT =[
   {
-    nftcontract: "0xd0bd375a43b58fd8329980898802667a64623f60",
+    nftcontract: "0x130471fE74F2d7d305AefC93DF837Af81Cd87237",
     name:"zen1",
-    CID:"Qmecr9u77NMse117M1CJjNnt1aNV1L9G897AhHmbhBiZdM"
+    CID:"QmdBoggjVJi1zhxtxuuzj4GBE8hsb8SNdmjo4BgmKTwx6g"
   },
-  {
-    nftcontract: "0x8ee54067dbb58d872424050234df6162aa27c06d",
-    name:"zen2",
-    CID:"QmRn52MzEUnd8DD2UQugi6khgPPFjrztGHBKKHgakftbnN"
-  }
+
 
 ]

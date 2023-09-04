@@ -62,12 +62,7 @@ export function Header() {
       } border-b items-center border-blue-500 max-w-screen-xl  md:py-2 px-4 lg:px-8 lg:py-4 bg-transparent sticky top-[0px] backdrop-blur-md z-[100] `}
     >
       <div className="container mx-auto flex items-center  justify-between text-blue-gray-900">
-        <a
-          href="https://neofilms.movie/"
-          target="_blank"
-          rel="noreferrer"
-          className="cursor-pointer flex justify-center items-center gap-5"
-        >
+      <Link href="/">
           <LazyLoadImage
             src={Logo.src}
             width={100}
@@ -75,7 +70,7 @@ export function Header() {
             className=" cursor-pointer"
             height={50}
           />
-        </a>
+        </Link>
 
         <div className="hidden lg:block">
           <div className="flex flex-row items-center gap-x-5">

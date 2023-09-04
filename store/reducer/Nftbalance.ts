@@ -9,45 +9,34 @@ import {
   getNFTContractInstanceforhook,
 } from "../../utils/Contracthelper";
 
+const options = {
+  method: "GET",
+  headers: {
+    Accept: "application/json",
+    "X-API-Key":
+      "hfFDDgyJiGcA93sEfRWQF61kqPD66rc7etsRDlEjjOZxQ3LVNZKMYRyB2Na3vx6f",
+  },
+};
+
+//https://deep-index.moralis.io/api/v2/${user}/nft?chain=polygon&format=decimal&limit=100&disable_total=true&token_addresses%5B0%5D=${process.env.nftaddress}&media_items=false
+
 
 export const GetallNFTBYwallet = createAsyncThunk(
   "GetallNFTBYwallet",
-  async (
-    parms: {
-      user: string | null | undefined;
-      nftaddress: any;
-      provider: any;
-      pool: any;
-    },
-    { dispatch }
-  ) => {
-    const nftinstance = await getNFTContractInstanceforhook(
-      parms.nftaddress,
-      parms.user,
-      parms.provider
+  async (parms: {   
+     user: string | null | undefined;
+    nftaddress: any;
+    provider: any;
+    pool: any;}, { dispatch }) => {
+    const output = await axios.get(
+      `https://deep-index.moralis.io/api/v2/${parms.user}/nft?chain=mumbai&format=decimal&limit=100&disable_total=true&token_addresses%5B0%5D=${parms.nftaddress}&media_items=false`,
+      options
     );
-
-    
-    let tokenIds = [];
-    if (parms.pool == 0) {
-      const count = hexToInt(await nftinstance.balanceOf(parms.user));
-      for (let i = 0; i < count; i++) {
-        tokenIds.push(
-          hexToInt(await nftinstance.tokenOfOwnerByIndex(parms.user, i))
-        );
-      }
-    } else {
-      const res = await nftinstance.walletOfOwner(parms.user);
-      res.forEach((element: any) => {
-        tokenIds.push(hexToInt(element));
-      });
-    }
-
-
-
-    return tokenIds;
+    const nftArrayFromAPI = output.data.result;
+    return nftArrayFromAPI;
   }
 );
+
 
 
 
@@ -60,9 +49,17 @@ export const getStakedTokens = createAsyncThunk(
   ) => {
     const instance = await getContractInstance(parms.contract);
     const yourDepositToken = await instance.getStakedTokens(parms.user);
-    const yourDeposit: [] = yourDepositToken.map((e: any) =>
-      hexToInt(e.tokenId)
-    );
+    const getNftstate:any = NFT.filter((e)=>{
+    return e.nftcontract ==parms.nft
+     });
+console.log(getNftstate,"asas");
+
+
+
+    const yourDeposit = yourDepositToken.map((e: any) => ({
+      token_id: hexToInt(e.tokenId),
+      image: `https://dweb.link/ipfs/${getNftstate[0].CID}/${hexToInt(e.tokenId)}.png`, // Replace "asas" with the actual image URL or source
+    }));
 
     return yourDeposit;
   }

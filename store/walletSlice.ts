@@ -5,7 +5,7 @@ import { nftdata } from "../typeing";
 interface PoolsState {
 loading: "idle" | "pending" | "done" | "error";
 stakeLoad:"idle" | "pending" | "done" | "error";
-nftbalance:number[],
+nftbalance:any[],
 walletModel:boolean,
 stakedtoken:nftdata[]
 

@@ -1,6 +1,11 @@
-export const ConvertLink = (CID:any,tokenId:any) => {
 
-      return `https://test34.mypinata.cloud/ipfs/${CID}/${tokenId}.png`
-  
-  };
-  
+  export const ConvertLink = (link: any) => {
+    if (!link) {
+      return;
+    }
+    if (link.startsWith("ipfs://")) {
+      return `https://dweb.link/ipfs/${link.split("ipfs://")[1]}`;
+    } else {
+      return link;
+    }
+  };  

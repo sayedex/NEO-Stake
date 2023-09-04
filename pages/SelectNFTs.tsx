@@ -29,6 +29,8 @@ function SelectNFTs({}: Props) {
   const { id, isStake: parmsStake } = router.query || {};
   const { contract, limit, min, max, nftcontract } = pools[Number(id)] || {};
   const isStake = parmsStake === "true";
+
+
   const load = isStake ? loading : stakeLoad;
   const { data: library } = useSigner();
    const balance = isStake
@@ -126,7 +128,7 @@ const call =()=>{
 
   return (
     <div className="h-screen md:h-screen overflow-hidden">
-      <div className="max-w-7xl w-full flex flex-col items-center h-[70vh] gap-5 pb-[80px] overflow-y-scroll border-[#cbff0f] m-auto relative border-[8px] bg-black">
+      <div className="max-w-7xl w-full flex flex-col items-center h-[70vh] gap-5 pb-[80px] overflow-y-scroll border-[#9061F9] m-auto relative border-[8px] bg-black">
         <div className="flex flex-row flex-wrap flex-auto gap-4 justify-center items-center pt-10 ">
           {load == "done" ? (
             balance.length === 0 ? (
@@ -146,7 +148,7 @@ const call =()=>{
               </p>
             ) : (
                balance?.map((e,indx) => {
-                return <Nft nft={e} nftcontract={nftcontract} key={indx} />;
+                return <Nft nft={e} isStake={isStake} nftcontract={nftcontract} key={indx} />;
               })
             )
           ) : (
@@ -167,7 +169,7 @@ const call =()=>{
           onClick={() => {
             router.push("/");
           }}
-          className="batchstake"
+          className="batchstake bg-[#ff0000] text-white font-semibold"
         >
           Cancel
         </button>
@@ -177,7 +179,7 @@ const call =()=>{
             onClick={() => {
               isStake ? BatchStake() : BatchUnStake();
             }}
-            className="batchstake"
+            className="stake_btn w-full"
           >
             {isLoading ? (
               <Spinner
@@ -195,7 +197,7 @@ const call =()=>{
           <button
             onClick={() => Setapprovalall()}
             disabled={isLoading}
-            className="batchstake"
+            className="stake_btn w-full"
           >
             {isLoading ? (
               <Spinner

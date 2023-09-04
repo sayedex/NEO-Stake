@@ -8,6 +8,9 @@ import useDirectCall from "../../hooks/useTransation";
 import Skeleton from "./Skeleton";
 import { Toast, toast } from "react-hot-toast";
 import { useAccount, useSigner } from "wagmi";
+import { getSinglepool } from "../../store/reducer/getPool";
+import { useAppdispatch } from "../../hooks/redux";
+
 
 type Props = {
   data: Pool;
@@ -15,6 +18,7 @@ type Props = {
 };
 
 function Poolbox({ data, indx }: Props) {
+  const dispatch = useAppdispatch();
   const { pools, loading } = useAppSelector((state) => state.pool);
   const { address } = useAccount();
   const router = useRouter();
@@ -65,7 +69,10 @@ function Poolbox({ data, indx }: Props) {
   const claim = async () => {
     if (address) {
       if (unclaimed && Number(unclaimed) > 0) {
-        claimRewards("claimRewards");
+        claimRewards("claimRewards").then((e)=>{
+          getSingle();
+        })
+      
       } else {
         toast.error("You don't have enough reward");
       }
@@ -73,6 +80,12 @@ function Poolbox({ data, indx }: Props) {
       toast.error("connect your wallet");
     }
   };
+
+  const getSingle = async()=>{
+    dispatch(getSinglepool({user:address,ID:indx}))
+  }
+
+
 
   return (
     <div className="m-3  p-[.5px] bg_btn_gr whitespace-nowrap    rounded-2xl relative  ">
@@ -123,7 +136,8 @@ function Poolbox({ data, indx }: Props) {
             onClick={() => claim()}
             className="transition-all px-6 py-2  border rounded-3xl flex sm:flex-initial flex-1 items-center justify-center  text-white disabled:bg-slate-500 disabled:cursor-not-allowed uppercase"
           >
-            Claim Rewards
+        
+            {`${isLoading?"Loading..":" Claim Rewards"}`}
           </button>
 
           {/* claim button */}
@@ -133,10 +147,10 @@ function Poolbox({ data, indx }: Props) {
         {/* 2nd section */}
         <div className=" flex flex-col  gap-y-3">
           <div className="flex flex-wrap justify-center gap-3">
-            <button  className="stake_btn">
+            <button  onClick={()=>stake()} className="stake_btn">
                STAKE
             </button>
-            <button className="stake_btn">
+            <button onClick={()=>unstake()}  className="stake_btn">
                UnSTAKE
             </button>
           </div>
