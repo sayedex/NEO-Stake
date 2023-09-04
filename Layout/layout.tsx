@@ -17,7 +17,7 @@ const Layout = (props: any) => {
     
 
   return (
-    <div className="   bg-[#1c0030] ">
+    <div className="   ">
       <Header />
       {props.children}
       {/* <Footer/> */}

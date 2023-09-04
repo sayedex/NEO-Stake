@@ -10,7 +10,12 @@ export const getALLpool = createAsyncThunk(
    
       const instance = await getContractInstance(pool.contract);
       const totalDeposit = await instance.totalStaked();
+      const getRate = await instance.rewardperday();
+      const rate= await ethers.utils.formatUnits(getRate, 18);
+
+      console.log(rate);
       
+
       if (parms.user) {
         const yourDepositToken = await instance.getStakedTokens(parms.user);
         const yourDeposit:[] = yourDepositToken.map((e: any) =>
@@ -18,20 +23,21 @@ export const getALLpool = createAsyncThunk(
         );
         
         const unclaimedState = await instance.availableRewards(parms.user);
-        const getRate = await instance.getMonthlyRate(parms.user);
-        const rate= await ethers.utils.formatUnits(getRate, 18);
         const unclaimed = await ethers.utils.formatUnits(unclaimedState, 18);
+
 
         return {
           ...pool,
           totaldeposit: hexToInt(totalDeposit),
-          rate:rate,
+          rate:parseInt(rate),
           yourdeposit: yourDeposit,
           unclaimed: unclaimed,
         };
       } else {
+  
         return {
           ...pool,
+          rate:parseInt(rate),
           totaldeposit: hexToInt(totalDeposit),
         };
       }

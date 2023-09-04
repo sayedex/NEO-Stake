@@ -32,7 +32,7 @@ body {
       }
 
 	.stake_btn{
-		@apply transition-all sm:w-[150px] font-semibold text-white  sm:h-[44px] w-auto h-auto sm:py-0 py-2 bg-gradient-to-r from-purple-500 to-indigo-600  rounded-[10px] flex sm:flex-initial flex-1 items-center justify-center   disabled:bg-slate-500 disabled:cursor-not-allowed
+		@apply transition-all sm:w-[150px] hover:opacity-70 font-semibold text-white  sm:h-[44px] w-auto h-auto sm:py-0 py-2 bg-gradient-to-r from-purple-500 to-indigo-600  rounded-[10px] flex sm:flex-initial flex-1 items-center justify-center   disabled:bg-slate-500 disabled:cursor-not-allowed
 	}
 	.batchstake{
 		@apply transition-all w-[180px] h-[44px] bg-[#cbff0f] hover:bg-[#e1ff73] rounded-[10px] flex items-center justify-center   text-black uppercase disabled:bg-slate-500 disabled:cursor-not-allowed

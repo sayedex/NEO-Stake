@@ -91,7 +91,7 @@ function Poolbox({ data, indx }: Props) {
     <div className="m-3  p-[.5px] bg_btn_gr whitespace-nowrap    rounded-2xl relative  ">
       <div className="p-5 m-[1px]  bg-[#20002c] w-[80vw]   whitespace-nowrap rounded-2xl    sm:w-[400px] h-auto    flex flex-col">
         <div className="flex flex-row gap-2 items-end">
-          <p className="font-facebisonbold text-center  text-3xl text-white   tracking-[2px] flex-auto">
+          <p className="font-facebisonbold text-center uppercase  text-3xl text-white   tracking-[2px] flex-auto">
             {name}
           </p>
         </div>
@@ -110,9 +110,9 @@ function Poolbox({ data, indx }: Props) {
             value={yourdeposit ? yourdeposit.length : 0}
           />
           <Deposit
-            text="NEO/Month"
+            text="NeoBux Per/Day"
             load={loading == "done"}
-            value={yourdeposit ? yourdeposit.length : 0}
+            value={rate}
           />
 
           {/* unclaimed reward */}
@@ -134,7 +134,7 @@ function Poolbox({ data, indx }: Props) {
           <button
             disabled={isLoading}
             onClick={() => claim()}
-            className="transition-all px-6 py-2  border rounded-3xl flex sm:flex-initial flex-1 items-center justify-center  text-white disabled:bg-slate-500 disabled:cursor-not-allowed uppercase"
+            className="transition-all px-6 py-2  border rounded-3xl flex sm:flex-initial flex-1 items-center justify-center  text-white  disabled:cursor-not-allowed uppercase"
           >
         
             {`${isLoading?"Loading..":" Claim Rewards"}`}

@@ -2,7 +2,7 @@ import { Pool } from "../typeing";
 
 export const pools: Pool[] = [
   { id:0,
-    name: "GEN 1 POOL",
+    name: "Genesis",
     header: "For 1-5x Holders",
     rate: "0",
     contract:"0x6eeFdd781Cef85847F696c0BeD22E0475B265bA6",

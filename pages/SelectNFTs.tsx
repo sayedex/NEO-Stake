@@ -134,17 +134,8 @@ const call =()=>{
             balance.length === 0 ? (
               <p className="font-creepster sm:text-[40px] text-[20px] text-white text-center">
               {isStake?"You don't have any NFTs":"You didn't stake NFTs."}
-                <br /> Please mint{" "}
-                <span>
-                  <a
-                    href="https://www.zombabies.io/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-white transition-all hover:text-slate-700"
-                  >
-                    here
-                  </a>
-                </span>
+             
+        
               </p>
             ) : (
                balance?.map((e,indx) => {
@@ -169,7 +160,7 @@ const call =()=>{
           onClick={() => {
             router.push("/");
           }}
-          className="batchstake bg-[#ff0000] text-white font-semibold"
+          className="batchstake bg-[#ff0000] hover:bg-[#8c0b0b] text-white font-semibold"
         >
           Cancel
         </button>

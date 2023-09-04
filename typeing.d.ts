@@ -3,7 +3,7 @@ export interface Pool {
     name: string;
     header: string;
     type?: string;
-    rate?: string;
+    rate?: any;
     contract:string
     nftcontract?: string;
     totaldeposit?: any;
