@@ -49,6 +49,7 @@ export function Nft({ nft,nftcontract,isStake }: Props) {
 //    }, [nft,nftcontract]);
 
 
+const isVideo = metadata.image.endsWith('.mp4'); // Check if the URL ends with '.mp4'
 
 
   return (
@@ -58,14 +59,23 @@ export function Nft({ nft,nftcontract,isStake }: Props) {
         isSelected && "border-[6px]"
       }`}
     >
+       {isVideo ? (
+      <video
+        src={ConvertLink(metadata.image)}
+        autoPlay
+        loop
+        className="w-full h-full"
+      ></video>
+    ) : (
       <LazyLoadImage
         src={ConvertLink(metadata.image)}
         alt=""
         afterLoad={() => {
           setimgload(true);
         }}
-        className={`"w-full h-full bg-white`}
+        className="w-full h-full bg-white"
       />
+    )}
 
       {!imgload && (
         <LazyLoadImage

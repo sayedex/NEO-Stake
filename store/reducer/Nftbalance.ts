@@ -52,13 +52,10 @@ export const getStakedTokens = createAsyncThunk(
     const getNftstate:any = NFT.filter((e)=>{
     return e.nftcontract ==parms.nft
      });
-console.log(getNftstate,"asas");
-
-
 
     const yourDeposit = yourDepositToken.map((e: any) => ({
       token_id: hexToInt(e.tokenId),
-      image: `https://dweb.link/ipfs/${getNftstate[0].CID}/${hexToInt(e.tokenId)}.png`, // Replace "asas" with the actual image URL or source
+      image: `https://dweb.link/ipfs/${getNftstate[0].CID}/${getNftstate[0].isSame?getNftstate[0].name:hexToInt(e.tokenId)}.${getNftstate[0].type}`, // Replace "asas" with the actual image URL or source
     }));
 
     return yourDeposit;
