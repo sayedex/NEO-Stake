@@ -79,30 +79,30 @@ export const pools: Pool[] = [
 export const NFT =[
   {
     nftcontract: "0x130471fE74F2d7d305AefC93DF837Af81Cd87237",
-    name:"Platinum",
+    name:"NEO",
+    thCID:"QmdBoggjVJi1zhxtxuuzj4GBE8hsb8SNdmjo4BgmKTwx6g",
     CID:"QmdBoggjVJi1zhxtxuuzj4GBE8hsb8SNdmjo4BgmKTwx6g",
-    type:"png",
     isSame:false,
   },
   {
     nftcontract: "0xAbc163e962c87127e0c74888B551946e573c0da2",
     name:"Platinum",
-    CID:"QmRbbM9TbsXo6rErwQdpmMq1HPDFZXi6sXnNwJeT2Kqf96",
-    type:"mp4",
+    thCID:"QmNt67zFxvwmCdizcTWtktQ16MxE3rQ6VJWMF8AoQiwc8Q",
+    CID:"QmNt67zFxvwmCdizcTWtktQ16MxE3rQ6VJWMF8AoQiwc8Q",
     isSame:true,
   },
   {
     nftcontract: "0x99858CF814fd0f704962c7A81965CaF30326113e",
     name:"Gold",
-    CID:"QmRbbM9TbsXo6rErwQdpmMq1HPDFZXi6sXnNwJeT2Kqf96",
-    type:"mp4",
+    thCID:"QmNt67zFxvwmCdizcTWtktQ16MxE3rQ6VJWMF8AoQiwc8Q",
+    CID:"QmNt67zFxvwmCdizcTWtktQ16MxE3rQ6VJWMF8AoQiwc8Q",
     isSame:true,
   },
   {
     nftcontract: "0x58da1e55744dB7F3f92F43E226A2F9d5B132a2ba",
     name:"Diamond",
-    CID:"QmRbbM9TbsXo6rErwQdpmMq1HPDFZXi6sXnNwJeT2Kqf96",
-    type:"mp4",
+    thCID:"QmNt67zFxvwmCdizcTWtktQ16MxE3rQ6VJWMF8AoQiwc8Q",
+    CID:"QmNt67zFxvwmCdizcTWtktQ16MxE3rQ6VJWMF8AoQiwc8Q",
     isSame:true,
   },
 ]

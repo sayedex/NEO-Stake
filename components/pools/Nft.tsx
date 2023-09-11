@@ -6,25 +6,21 @@ import { ConvertLink } from "../../utils/ipfs";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import placeholder from "../../public/IMG/layer.png";
 import Image from "next/image";
-import {NFT} from "../../config/index"
+import { NFT } from "../../config/index";
 import { json } from "stream/consumers";
 
 type Props = {
   nft: any;
-  nftcontract:string | undefined,
-  isStake:Boolean
-
+  nftcontract: string | undefined;
+  isStake: Boolean;
 };
 
-export function Nft({ nft,nftcontract,isStake }: Props) {
+export function Nft({ nft, nftcontract, isStake }: Props) {
   const dispatch = useAppdispatch();
   const [metauri, setmetauri] = useState("");
   const [imgload, setimgload] = useState(false);
   const { usersellectedID } = useAppSelector((state) => state.pool);
-  const metadata = isStake?JSON.parse(nft.metadata):nft;
- console.log(nft);
- 
-  
+  const metadata = isStake ? JSON.parse(nft.metadata) : nft;
 
   const isSelected = usersellectedID.includes(Number(nft.token_id));
 
@@ -32,24 +28,29 @@ export function Nft({ nft,nftcontract,isStake }: Props) {
     dispatch(AddID(Number(nft.token_id)));
   };
 
+  const ConvertCID = (CID: any, tokenId: any) => {
+    return `https://dweb.link/ipfs/${CID}/${tokenId}.png`;
+  };
 
+  useEffect(() => {
+    const getNftstate = NFT.filter((e) => {
+      return e.nftcontract == nftcontract;
+    });
+    const firstFilteredObject = getNftstate[0];
+    const { CID,isSame,thCID,name}  = firstFilteredObject;
+     if (firstFilteredObject) {
+    
+      if(isStake){
+        const url = ConvertCID(CID, isSame?name:nft.token_id);
+        setmetauri(url)
+      }else{
+        const url = ConvertCID(thCID, isSame?name:nft.token_id);
+        setmetauri(url)
+      }
 
+    }
+  }, [nft, nftcontract]);
 
-  
-
-//  useEffect(() => {
-//   const getNftstate  = NFT.filter((e)=>{
-//     return e.nftcontract ==nftcontract
-//   });
-//   const firstFilteredObject = getNftstate[0];
-//   if(firstFilteredObject){
-//     const url =ConvertLink(firstFilteredObject.CID,nft)
-//     setmetauri(url);
-//   }
-//    }, [nft,nftcontract]);
-
-
-const isVideo = metadata.image.endsWith('.mp4'); // Check if the URL ends with '.mp4'
 
 
   return (
@@ -59,33 +60,33 @@ const isVideo = metadata.image.endsWith('.mp4'); // Check if the URL ends with '
         isSelected && "border-[6px]"
       }`}
     >
-       {isVideo ? (
-      <video
-        src={ConvertLink(metadata.image)}
-        autoPlay
-        loop
-        className="w-full h-full"
-      ></video>
-    ) : (
-      <LazyLoadImage
-        src={ConvertLink(metadata.image)}
-        alt=""
-        afterLoad={() => {
-          setimgload(true);
-        }}
-        className="w-full h-full bg-white"
-      />
-    )}
-
-      {!imgload && (
-        <LazyLoadImage
+        <Image
+          src={metauri}
+          alt="loading.."
+          width={300}
+          height={300}
           loading="lazy"
-          afterLoad={() => {}}
+          placeholder="blur"
+          blurDataURL={placeholder.src}
+          onLoadingComplete={() => {
+            setimgload(true);
+            console.log("done");
+            
+          }}
+          className="w-full h-full bg-white"
+        />
+   
+
+      {/* {!imgload && (
+        <Image
+          loading="lazy"
+          width={300}
+          height={300}
           src={placeholder.src}
           alt=""
           className="w-full h-full"
         />
-      )}
+      )} */}
     </div>
   );
 }
