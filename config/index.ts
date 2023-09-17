@@ -1,108 +1,145 @@
 import { Pool } from "../typeing";
 
+
+export const stakingcontractaddress = "0xa32079d6468121F2cf1487c9572D639F09959a81";
+export const Purchasecontract  = "0xeB6ef6Dc25c26bB4b62534Dc11B2BfF6C02181E7";
+export const NeoBoxcontract = "0x98401Ef9f441f88072F7d13314071D2644Ea38c1";
+export const rewardNFTuri="ipfs://QmbMCwsznaRRLr4Sy9W8o8NGmE8R2oJTC7P8YFZDFvQgr2/"
+
 export const pools: Pool[] = [
-  { id:0,
+  {
+    id: 0,
     name: "Genesis",
     header: "For 1-5x Holders",
     rate: "0",
-    contract:"0x6eeFdd781Cef85847F696c0BeD22E0475B265bA6",
     nftcontract: "0x130471fE74F2d7d305AefC93DF837Af81Cd87237",
     totaldeposit: 0,
     yourdeposit: 0,
     unclaimed: "0",
-    limit:false,
-    headerIMG:"/pool/1.png",
-    min:0,
-    max:0,
+    limit: false,
+    headerIMG: "/pool/1.png",
+    min: 0,
+    max: 0,
+    poolId:3,
+    rewardnft: [
+      {
+        name: "30% reward nft",
+        cid: "",
+        tokenid: 0,
+        imgName:"30"
+      },
+      {
+        name: "40% reward nft",
+        cid: "",
+        tokenid: 1,
+        imgName:"40"
+      },
+      {
+        name: "50% reward nft",
+        cid: "",
+        tokenid: 2,
+        imgName:"50"
+      },
+    ],
   },
-  { id:0,
-    name: "Platinum",
-    header: "For 1-5x Holders",
-    rate: "0",
-    contract:"0x73bFd328DA0EFcDC586feD007c72af0cde06Ed2d",
-    nftcontract: "0xAbc163e962c87127e0c74888B551946e573c0da2",
-    totaldeposit: 0,
-    yourdeposit: 0,
-    unclaimed: "0",
-    limit:false,
-    headerIMG:"/pool/1.png",
-    min:0,
-    max:0,
-  },
-  { id:0,
+  {
+    id: 0,
     name: "Gold",
     header: "For 1-5x Holders",
     rate: "0",
-    contract:"0x18B515FEb7d599974496D40564Ae08A307fbBf08",
     nftcontract: "0x99858CF814fd0f704962c7A81965CaF30326113e",
     totaldeposit: 0,
     yourdeposit: 0,
     unclaimed: "0",
-    limit:false,
-    headerIMG:"/pool/1.png",
-    min:0,
-    max:0,
+    limit: false,
+    headerIMG: "/pool/1.png",
+    min: 0,
+    max: 0,
+    poolId:1,
+    rewardnft: [
+      {
+        name: "Gold reward nft",
+        cid: "",
+        tokenid: 4,
+        imgName:"GOLD"
+      }]
   },
-  { id:0,
+  {
+    id: 0,
+    name: "Platinum",
+    header: "For 1-5x Holders",
+    rate: "0",
+    nftcontract: "0xAbc163e962c87127e0c74888B551946e573c0da2",
+    totaldeposit: 0,
+    yourdeposit: 0,
+    unclaimed: "0",
+    limit: false,
+    headerIMG: "/pool/1.png",
+    min: 0,
+    max: 0,
+    poolId:0,
+    rewardnft: [
+      {
+        name: "Platinum reward nft",
+        cid: "",
+        tokenid: 5,
+        imgName:"PLATINUM"
+      }]
+  },
+
+  {
+    id: 0,
     name: "Diamond",
     header: "For 1-5x Holders",
     rate: "0",
-    contract:"0x40418D367f43428640247EeD3DFbC0Ac5e8b78C7",
     nftcontract: "0x58da1e55744dB7F3f92F43E226A2F9d5B132a2ba",
     totaldeposit: 0,
     yourdeposit: 0,
     unclaimed: "0",
-    limit:false,
-    headerIMG:"/pool/1.png",
-    min:0,
-    max:0,
+    limit: false,
+    headerIMG: "/pool/1.png",
+    min: 0,
+    max: 0,
+    poolId:2,
+    rewardnft: [
+      {
+        name: "Diamond reward nft",
+        cid: "",
+        tokenid: 3,
+        imgName:"DIAMOND"
+      }]
   },
-  
-  
+
   // Add more pool objects as needed
 ];
 
-
-
-// export const NFT =[
-//   {
-//     nftcontract: "0x03869836C325323e201c7bCC0E07D8B8A7671470",
-//     name:"zen1"
-//   },
-//   {
-//     nftcontract: "0xC253aA4a596DE76DD62122c9CE8Cbcbd4d069703",
-//     name:"zen2"
-//   }
-
-// ]
-
-export const NFT =[
+export const NFT = [
   {
     nftcontract: "0x130471fE74F2d7d305AefC93DF837Af81Cd87237",
-    name:"NEO",
-    thCID:"QmdBoggjVJi1zhxtxuuzj4GBE8hsb8SNdmjo4BgmKTwx6g",
-    CID:"QmdBoggjVJi1zhxtxuuzj4GBE8hsb8SNdmjo4BgmKTwx6g",
-    isSame:false,
+    name: "NEO",
+    thCID: "QmdBoggjVJi1zhxtxuuzj4GBE8hsb8SNdmjo4BgmKTwx6g",
+    CID: "QmdBoggjVJi1zhxtxuuzj4GBE8hsb8SNdmjo4BgmKTwx6g",
+    isSame: false,
   },
   {
     nftcontract: "0xAbc163e962c87127e0c74888B551946e573c0da2",
-    name:"Platinum",
-    thCID:"QmNt67zFxvwmCdizcTWtktQ16MxE3rQ6VJWMF8AoQiwc8Q",
-    CID:"QmNt67zFxvwmCdizcTWtktQ16MxE3rQ6VJWMF8AoQiwc8Q",
-    isSame:true,
+    name: "Platinum",
+    thCID: "QmNt67zFxvwmCdizcTWtktQ16MxE3rQ6VJWMF8AoQiwc8Q",
+    CID: "QmNt67zFxvwmCdizcTWtktQ16MxE3rQ6VJWMF8AoQiwc8Q",
+    isSame: true,
   },
   {
     nftcontract: "0x99858CF814fd0f704962c7A81965CaF30326113e",
-    name:"Gold",
-    thCID:"QmNt67zFxvwmCdizcTWtktQ16MxE3rQ6VJWMF8AoQiwc8Q",
-    CID:"QmNt67zFxvwmCdizcTWtktQ16MxE3rQ6VJWMF8AoQiwc8Q",
-    isSame:true,
+    name: "Gold",
+    thCID: "QmNt67zFxvwmCdizcTWtktQ16MxE3rQ6VJWMF8AoQiwc8Q",
+    CID: "QmNt67zFxvwmCdizcTWtktQ16MxE3rQ6VJWMF8AoQiwc8Q",
+    isSame: true,
   },
   {
     nftcontract: "0x58da1e55744dB7F3f92F43E226A2F9d5B132a2ba",
-    name:"Diamond",
-    thCID:"QmNt67zFxvwmCdizcTWtktQ16MxE3rQ6VJWMF8AoQiwc8Q",
-    CID:"QmNt67zFxvwmCdizcTWtktQ16MxE3rQ6VJWMF8AoQiwc8Q",
-    isSame:true,
+    name: "Diamond",
+    thCID: "QmNt67zFxvwmCdizcTWtktQ16MxE3rQ6VJWMF8AoQiwc8Q",
+    CID: "QmNt67zFxvwmCdizcTWtktQ16MxE3rQ6VJWMF8AoQiwc8Q",
+    isSame: true,
   },
-]
+];

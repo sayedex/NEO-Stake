@@ -4,7 +4,6 @@ export interface Pool {
     header: string;
     type?: string;
     rate?: any;
-    contract:string
     nftcontract?: string;
     totaldeposit?: any;
     yourdeposit?: any;
@@ -14,8 +13,18 @@ export interface Pool {
     min:number,
     max:number,
     headerIMG:string
+    rewardnft?:rewardnft[]
+    poolId:number,
+    staked?:number,
   }
 
+  export type rewardnft = {
+    name : string,
+    cid:string,
+    tokenid:number,
+    imgName?:string
+
+  }
   export type nftdata ={
     token_id:string,
     metadata:any,
@@ -24,3 +33,12 @@ export interface Pool {
     token_address:string
     token_uri:string
 }
+
+export type Listinginfo = {
+  value: number;
+  maxLimit: number;
+  totalBuy: number;
+  collectionAddress: string;
+  pause: boolean;
+}
+

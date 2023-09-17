@@ -7,13 +7,12 @@ import {
   IconButton,
 } from "@material-tailwind/react";
 import logo from "../../public/logo.webp";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import Logo from "../../public/Logo.png";
 import Link from "next/link";
+import Image from "next/image";
 import { ConnectButtonwagmi } from "./connect";
 //redux
 import { useAppdispatch, useAppSelector } from "../../hooks/redux";
-
 import { HeaderList } from "../../config/Headerlist";
 export function Header() {
 
@@ -63,7 +62,7 @@ export function Header() {
     >
       <div className="container mx-auto flex items-center  justify-between text-blue-gray-900">
       <Link href="/">
-          <LazyLoadImage
+          <Image
             src={Logo.src}
             width={100}
             alt="logo"

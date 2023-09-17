@@ -40,6 +40,10 @@ body {
   .bg_btn_gr {
     @apply bg-gradient-to-r from-blue-500 to-pink-500
    }
+   .incredrementbtn{
+    @apply bg-[#2b2b2b] p-1 rounded-lg cursor-pointer hover:scale-125 transition-all	
+
+   }
      
 
    

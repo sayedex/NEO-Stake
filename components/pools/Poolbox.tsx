@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Deposit } from "./Deposit";
 import { useRouter } from "next/router";
 import { Pool } from "../../typeing";
@@ -6,12 +6,15 @@ import { useAppSelector } from "../../hooks/redux";
 import { formatNumber } from "../../utils/format";
 import useDirectCall from "../../hooks/useTransation";
 import Skeleton from "./Skeleton";
-import { Toast, toast } from "react-hot-toast";
+import { BasicBuyModal } from "./Buymodel";
+import { ToastContainer, toast } from "react-toastify";
 import { useAccount, useSigner } from "wagmi";
 import { getSinglepool } from "../../store/reducer/getPool";
 import { useAppdispatch } from "../../hooks/redux";
-
-
+import { setModel } from "../../store/walletSlice";
+import Link from "next/link";
+import { useMediaQuery } from "react-responsive";
+import { pools, stakingcontractaddress } from "../../config";
 type Props = {
   data: Pool;
   indx: number;
@@ -20,20 +23,35 @@ type Props = {
 function Poolbox({ data, indx }: Props) {
   const dispatch = useAppdispatch();
   const { pools, loading } = useAppSelector((state) => state.pool);
+  const { buymodel, nftbalance } = useAppSelector((state) => state.wallet);
   const { address } = useAccount();
   const router = useRouter();
-  const { data: signer } = useSigner();
-  const { unclaimed, totaldeposit, yourdeposit, rate } = pools[indx] || {};
+  const [model, setmodel] = useState(false);
 
-  const { contract, name, nftcontract, id, type, typeimg, headerIMG } =
+  const { data: signer } = useSigner();
+  const { unclaimed, totaldeposit, nftcontract,yourdeposit, rate, rewardnft ,staked,poolId} =
+    pools[indx] || {};
+
+  const { name, id, type, typeimg, headerIMG } =
     data || {};
+
+    const IsStaked = (staked?staked:0) >= 0;
+    const IsUnstaked = (staked?staked:0) > 0;
+
+  // filter nft length for each box
+  const nftCount = nftbalance?.filter((e) => {
+    return e.token_address.toLowerCase() == nftcontract?.toLowerCase();
+  });
+
+  //responsive state
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 550px)" });
 
   const {
     loading: isLoading,
     HandleRun,
     claimRewards,
     approve,
-  } = useDirectCall(signer, contract, address, nftcontract);
+  } = useDirectCall(signer, stakingcontractaddress, address, nftcontract);
   //stake
   const stake = () => {
     if (address) {
@@ -69,11 +87,11 @@ function Poolbox({ data, indx }: Props) {
   const claim = async () => {
     if (address) {
       if (unclaimed && Number(unclaimed) > 0) {
-        claimRewards("claimRewards").then((e)=>{
+        claimRewards("claimRewards",[poolId]).then((e) => {
           getSingle();
-        })
-      
+        });
       } else {
+        return;
         toast.error("You don't have enough reward");
       }
     } else {
@@ -81,14 +99,30 @@ function Poolbox({ data, indx }: Props) {
     }
   };
 
-  const getSingle = async()=>{
-    dispatch(getSinglepool({user:address,ID:indx}))
-  }
+  const setBuymode = () => {
+    if (address) {
+      setmodel(true);
+    } else {
+      toast.error("connect your wallet");
+    }
+  };
 
-
+  const getSingle = async () => {
+    dispatch(getSinglepool({ user: address, ID: indx }));
+  };
 
   return (
     <div className="m-3  p-[.5px] bg_btn_gr whitespace-nowrap    rounded-2xl relative  ">
+      <div className="h-[7px]"></div>
+      {/* modal for reward nft  */}
+      {model && (
+        <BasicBuyModal
+          rewardnft={rewardnft}
+          closeModal={() => setmodel(false)}
+        />
+      )}
+      {/* modal for reward nft  */}
+
       <div className="p-5 m-[1px]  bg-[#20002c] w-[80vw]   whitespace-nowrap rounded-2xl    sm:w-[400px] h-auto    flex flex-col">
         <div className="flex flex-row gap-2 items-end">
           <p className="font-facebisonbold text-center uppercase  text-3xl text-white   tracking-[2px] flex-auto">
@@ -97,29 +131,39 @@ function Poolbox({ data, indx }: Props) {
         </div>
 
         {/* 1st selction */}
-        <div className="p-5 flex flex-col gap-y-3">
+        <div className="p-3 flex flex-col gap-y-3">
           {/* total deposit  and user deposit  */}
-          <Deposit
+          {/* <Deposit
             text="Total Staked"
             load={loading == "done"}
             value={totaldeposit}
-          />
+          /> */}
           <Deposit
-            text="Staked"
+            text={`${
+              isTabletOrMobile ? "Eligible NFTs" : "Eligible NFTs to Stake"
+            }`}
+            load={loading == "done"}
+            value={nftCount ? nftCount.length : 0}
+          />
+
+          <Deposit
+            text={`${
+              isTabletOrMobile ? "Staked" : "Total NFTs Currently Staked"
+            }`}
             load={loading == "done"}
             value={yourdeposit ? yourdeposit.length : 0}
           />
           <Deposit
-            text="NeoBux Per/Day"
+            text={`${
+              isTabletOrMobile ? "Per/Day" : "NEOBux Estimated Per/Day"
+            }`}
             load={loading == "done"}
             value={rate}
           />
 
           {/* unclaimed reward */}
           <div>
-            <div className="  text-2xl text-white">
-              Unclaimed Rewards:
-            </div>
+            <div className="  text-xl text-white">Unclaimed NEOBux</div>
             {loading == "done" ? (
               <div className="text-white text-xl bg-[#3f0349c7] w-fit px-4 py-1 mt-1 ">
                 {formatNumber(Number(unclaimed))} NEO
@@ -131,31 +175,43 @@ function Poolbox({ data, indx }: Props) {
           {/* unclaimed reward */}
 
           {/* claim button */}
-          <button
+        <button
             disabled={isLoading}
             onClick={() => claim()}
-            className="transition-all px-6 py-2  border rounded-3xl flex sm:flex-initial flex-1 items-center justify-center  text-white  disabled:cursor-not-allowed uppercase"
+            className={`${Number(unclaimed) <= 0?"opacity-20":"opacity-100"} transition-all px-6 py-2  border rounded-3xl flex sm:flex-initial flex-1 items-center justify-center  text-white  disabled:cursor-not-allowed uppercase`}
           >
-        
-            {`${isLoading?"Loading..":" Claim Rewards"}`}
+            {`${isLoading ? "Loading.." : " Claim NEOBux"}`}
           </button>
 
           {/* claim button */}
-        </div>
-        {/* 1st selction */}
-
-        {/* 2nd section */}
-        <div className=" flex flex-col  gap-y-3">
+          <div className=" flex flex-col  gap-y-3">
           <div className="flex flex-wrap justify-center gap-3">
-            <button  onClick={()=>stake()} className="stake_btn">
-               STAKE
-            </button>
-            <button onClick={()=>unstake()}  className="stake_btn">
-               UnSTAKE
-            </button>
+            {IsStaked &&  (
+              <button onClick={() => stake()} className={`stake_btn ${!IsUnstaked?"w-full":""}`}>
+                STAKE
+              </button>
+            )}
+            {IsUnstaked && (
+              <button onClick={() => unstake()} className={`stake_btn ${!IsStaked?"w-full":""}`}>
+                UnSTAKE
+              </button>
+            )}
           </div>
         </div>
+
+        </div>
+        
         {/* 2nd section */}
+        <div className="m-4">
+          <button
+            onClick={() => {
+              setBuymode();
+            }}
+            className="transition-all px-4 py-2  border w-full rounded-3xl flex sm:flex-initial flex-1 items-center justify-center  text-white  disabled:cursor-not-allowed uppercase"
+          >
+           Purchase
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -3,26 +3,40 @@ import { use, useEffect } from "react";
 import Footer from "../components/Footer/Footer";
 import { Header } from "../components/Header/Header";
 import { GetallNFTBYwallet } from "../store/reducer/Nftbalance";
-import { Injected } from "../connectors/metamask";
 import { getALLpool } from "../store/reducer/getPool";
-import { useAccount } from "wagmi";
+import { NFT } from "../config/index";
+import { useAccount, useSigner } from "wagmi";
+import { wrapper } from "../store/store";
 
 const Layout = (props: any) => {
-  const {address}  = useAccount()
+  const { address } = useAccount();
   const dispatch = useAppdispatch();
+  const { data: library } = useSigner();
 
   useEffect(() => {
-      dispatch(getALLpool({user:address}))
-      }, [address]);
-    
+    if (address !== null && address !== undefined) {
+      dispatch(getALLpool({ user: address }));
+      dispatch(
+        GetallNFTBYwallet({ user: address, nftaddress: NFT, single: false })
+      );
+    } else {
+      dispatch(getALLpool({ user: address }));
+    }
+  }, [address]);
 
+
+
+
+  
   return (
-    <div className="   ">
+    <>
       <Header />
       {props.children}
       {/* <Footer/> */}
-    </div>
+    </>
   );
 };
+
+
 
 export default Layout;

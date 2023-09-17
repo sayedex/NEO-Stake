@@ -14,12 +14,10 @@ import {
 } from "../store/reducer/Nftbalance";
 import { getSinglepool } from "../store/reducer/getPool";
 type Props = {};
-import { useAccount ,useSigner} from "wagmi";
-
+import { useAccount, useSigner } from "wagmi";
+import { pools, stakingcontractaddress } from "../config/index";
 
 function SelectNFTs({}: Props) {
-
-
   const dispatch = useAppdispatch();
   const router = useRouter();
   const { nftbalance, loading, stakedtoken, stakeLoad } = useAppSelector(
@@ -27,26 +25,21 @@ function SelectNFTs({}: Props) {
   );
   const { pools, usersellectedID } = useAppSelector((state) => state.pool);
   const { id, isStake: parmsStake } = router.query || {};
-  const { contract, limit, min, max, nftcontract } = pools[Number(id)] || {};
+  const { limit, min, max, nftcontract, poolId } = pools[Number(id)] || {};
   const isStake = parmsStake === "true";
-
 
   const load = isStake ? loading : stakeLoad;
   const { data: library } = useSigner();
-   const balance = isStake
-    ? nftbalance
-     : stakedtoken;
+  const balance = isStake ? nftbalance : stakedtoken;
 
-  const {address} = useAccount()
+  const { address } = useAccount();
 
   const {
     loading: isLoading,
     HandleRun,
     approve,
     ApprovedForAll,
-  } = useDirectCall(library, contract, address, nftcontract);
-
-
+  } = useDirectCall(library, stakingcontractaddress, address, nftcontract);
 
   useEffect(() => {
     dispatch(setResetsellectedID());
@@ -55,23 +48,39 @@ function SelectNFTs({}: Props) {
   const RefetchHelper = () => {
     if (address) {
       dispatch(
-        getStakedTokens({ user: address, contract: contract, nft: nftcontract })
+        getStakedTokens({
+          user: address,
+          contract: stakingcontractaddress,
+          nft: nftcontract,
+          poolId: poolId,
+        })
       );
     }
   };
 
   useEffect(() => {
-    if(address){
-      dispatch(GetallNFTBYwallet({ user:address,provider:library,nftaddress:nftcontract,pool:Number(id)}));
+    if (address) {
+      dispatch(
+        GetallNFTBYwallet({
+          user: address,
+          nftaddress: nftcontract,
+          single: true,
+        })
+      );
     }
-   }, [address,nftcontract,Number(id)]);
+  }, [address, nftcontract, Number(id)]);
 
-
-const call =()=>{
-  if(address){
-    dispatch(GetallNFTBYwallet({ user:address,provider:library,nftaddress:nftcontract,pool:Number(id)}));
-  }
-}
+  const call = () => {
+    if (address) {
+      dispatch(
+        GetallNFTBYwallet({
+          user: address,
+          nftaddress: nftcontract,
+          single: true,
+        })
+      );
+    }
+  };
 
   useEffect(() => {
     RefetchHelper();
@@ -79,14 +88,25 @@ const call =()=>{
 
   //stake
   const BatchStake = async () => {
-    if (!contract && !address) return;
-   const stakedbalance = stakedtoken.length;
+    if (!address) return;
+    const stakedbalance = stakedtoken.length;
 
     if (limit && stakedbalance < min) {
       if (usersellectedID.length >= min && usersellectedID.length <= max) {
-        HandleRun("batchStake", [usersellectedID], "staked",usersellectedID.length).then((e) => {
+        HandleRun(
+          "stake",
+          [poolId,usersellectedID],
+          "staked",
+          usersellectedID.length
+        ).then((e) => {
           dispatch(getSinglepool({ user: address, ID: Number(id) }));
-          dispatch(GetallNFTBYwallet({ user:address,provider:library,nftaddress:nftcontract,pool:Number(id)}));
+          dispatch(
+            GetallNFTBYwallet({
+              user: address,
+              nftaddress: nftcontract,
+              single: true,
+            })
+          );
 
           router.push("/");
         });
@@ -96,11 +116,21 @@ const call =()=>{
     } else {
       //run those mint without any conditions..
       if (usersellectedID.length > 0) {
-        HandleRun("batchStake", [usersellectedID], "staked",usersellectedID.length).then((e) => {
+        HandleRun(
+          "stake",
+          [poolId,usersellectedID],
+          "staked",
+          usersellectedID.length
+        ).then((e) => {
           dispatch(getSinglepool({ user: address, ID: Number(id) }));
-          dispatch(GetallNFTBYwallet({ user:address,provider:library,nftaddress:nftcontract,pool:Number(id)}));
+          dispatch(
+            GetallNFTBYwallet({
+              user: address,
+              nftaddress: nftcontract,
+              single: true,
+            })
+          );
           router.push("/");
-          
         });
       } else {
         toast.error(`You should select at least 1 NFT`);
@@ -109,11 +139,22 @@ const call =()=>{
   };
 
   const BatchUnStake = async () => {
-    if (!contract && !address) return;
+    if (!address) return;
 
     if (usersellectedID.length > 0) {
-      HandleRun("batchWithdraw", [usersellectedID], "unstaked",usersellectedID.length).then((e) => {
-        dispatch(GetallNFTBYwallet({ user:address,provider:library,nftaddress:nftcontract,pool:Number(id)}));
+      HandleRun(
+        "withdraw",
+        [poolId,usersellectedID],
+        "unstaked",
+        usersellectedID.length
+      ).then((e) => {
+        dispatch(
+          GetallNFTBYwallet({
+            user: address,
+            nftaddress: nftcontract,
+            single: true,
+          })
+        );
         dispatch(getSinglepool({ user: address, ID: Number(id) }));
         router.push("/");
       });
@@ -123,7 +164,7 @@ const call =()=>{
   };
 
   const Setapprovalall = async () => {
-    ApprovedForAll("setApprovalForAll", [contract, 1]);
+    ApprovedForAll("setApprovalForAll", [stakingcontractaddress, 1]);
   };
 
   return (
@@ -133,13 +174,18 @@ const call =()=>{
           {load == "done" ? (
             balance.length === 0 ? (
               <p className="font-creepster sm:text-[40px] text-[20px] text-white text-center">
-              {isStake?"You don't have any NFTs":"You didn't stake NFTs."}
-             
-        
+                {isStake ? "You don't have any NFTs" : "You didn't stake NFTs."}
               </p>
             ) : (
-               balance?.map((e,indx) => {
-                return <Nft nft={e} isStake={isStake} nftcontract={nftcontract} key={indx} />;
+              balance?.map((e: any, indx: any) => {
+                return (
+                  <Nft
+                    nft={e}
+                    isStake={isStake}
+                    nftcontract={nftcontract}
+                    key={indx}
+                  />
+                );
               })
             )
           ) : (
@@ -201,7 +247,6 @@ const call =()=>{
             )}
           </button>
         )}
-    
       </div>
     </div>
   );

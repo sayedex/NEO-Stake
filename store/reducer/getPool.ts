@@ -1,46 +1,62 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { ethers } from "ethers";
-import { getContractInstance } from "../../utils/Contracthelper";
-import { pools } from "../../config";
+import {
+  getContractInstance,
+  calculatePerDayReward,
+} from "../../utils/Contracthelper";
+import { pools, stakingcontractaddress } from "../../config";
 import { hexToInt } from "../../utils/format";
 export const getALLpool = createAsyncThunk(
   "getAllPoolupdate",
   async (parms: { user: string | any }, { dispatch }) => {
-    const promises = pools.map(async (pool) => {
-      const instance = await getContractInstance(pool.contract);
-      const totalDeposit = await instance.totalStaked();
-      const getRate = await instance.rewardperday();
-      const rate = await ethers.utils.formatUnits(getRate, 18);
-
-      console.log(rate);
-
-      if (parms.user) {
-        const yourDepositToken = await instance.getStakedTokens(parms.user);
-        const yourDeposit: [] = yourDepositToken.map((e: any) =>
-          hexToInt(e.tokenId)
+    try {
+      const promises = pools.map(async (pool) => {
+        const poolID = pool.poolId;
+        const instance = await getContractInstance(stakingcontractaddress);
+        const { _timeUnit, _rewardsPerUnitTime, _totalStaked } =
+          await instance.getPoolinfo(poolID);
+        const timeInreward = _timeUnit.toString();
+        const RewardsPerUnit = await ethers.utils.formatUnits(
+          _rewardsPerUnitTime,
+          18
         );
+        const rate = calculatePerDayReward(RewardsPerUnit, timeInreward);
 
-        const unclaimedState = await instance.availableRewards(parms.user);
-        const unclaimed = await ethers.utils.formatUnits(unclaimedState, 18);
+        if (parms.user) {
+          const yourDepositToken = await instance.getStakedTokens(
+            poolID,
+            parms.user
+          );
+          const yourDeposit: [] = yourDepositToken.map((e: any) => hexToInt(e));
+          const { _rewards, _staked } = await instance.getUser(
+            poolID,
+            parms.user
+          );
+          const unclaimed = await ethers.utils.formatUnits(_rewards, 18);
 
-        return {
-          ...pool,
-          totaldeposit: hexToInt(totalDeposit),
-          rate: parseInt(rate),
-          yourdeposit: yourDeposit,
-          unclaimed: unclaimed,
-        };
-      } else {
-        return {
-          ...pool,
-          rate: parseInt(rate),
-          totaldeposit: hexToInt(totalDeposit),
-        };
-      }
-    });
-    const updatedPools = await Promise.all(promises);
+          return {
+            ...pool,
+            totaldeposit: hexToInt(_totalStaked),
+            rate: parseInt(rate),
+            yourdeposit: yourDeposit,
+            unclaimed: unclaimed,
+            staked:parseInt(_staked.toString())
+          };
+        } else {
+          return {
+            ...pool,
+            rate: parseInt(rate),
+            totaldeposit: hexToInt(_totalStaked),
+          };
+        }
+      });
+      const updatedPools = await Promise.all(promises);
 
-    return updatedPools;
+      return updatedPools;
+    } catch (e) {
+      console.log(e);
+      return [];
+    }
   }
 );
 
@@ -48,26 +64,33 @@ export const getSinglepool = createAsyncThunk(
   "getSinglepool",
   async (parms: { user: string | any; ID: number }, { dispatch }) => {
     const pool = pools[parms.ID];
-    const instance = await getContractInstance(pool.contract);
 
-    const unclaimedState = await instance.availableRewards(parms.user);
-    const unclaimed = await ethers.utils.formatUnits(unclaimedState, 18);
-    const totalDeposit = await instance.totalStaked();
-    const getRate = await instance.rewardperday();
-    const rate = await ethers.utils.formatUnits(getRate, 18);
-    const yourDepositToken = await instance.getStakedTokens(parms.user);
+    //new state
 
-    const yourDeposit: [] = yourDepositToken.map((e: any) =>
-      hexToInt(e.tokenId)
+    const poolID = pool.poolId;
+    const instance = await getContractInstance(stakingcontractaddress);
+    const { _timeUnit, _rewardsPerUnitTime, _totalStaked } =
+      await instance.getPoolinfo(poolID);
+    const timeInreward = _timeUnit.toString();
+    const RewardsPerUnit = await ethers.utils.formatUnits(
+      _rewardsPerUnitTime,
+      18
     );
-    console.log(yourDepositToken);
+    const rate = calculatePerDayReward(RewardsPerUnit, timeInreward);
+
+    const { _rewards, _staked } = await instance.getUser(poolID, parms.user);
+    const unclaimed = await ethers.utils.formatUnits(_rewards, 18);
+
+    const yourDepositToken = await instance.getStakedTokens(poolID, parms.user);
+    const yourDeposit: [] = yourDepositToken.map((e: any) => hexToInt(e));
 
     const updatedPool = {
       ...pool,
       rate: parseInt(rate),
-      totaldeposit: hexToInt(totalDeposit),
+      totaldeposit: hexToInt(_totalStaked),
       yourdeposit: yourDeposit,
       unclaimed: unclaimed,
+      staked:parseInt(_staked.toString())
     };
 
     return { updatedPool, poolID: parms.ID };
