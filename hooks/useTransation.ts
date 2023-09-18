@@ -57,7 +57,7 @@ const useDirectCall = (
       setSellTokenLoading(false);
     } catch (error:any) {
       if(error.code =="ACTION_REJECTED"){
-        toast.error("User Cancelled The Trainsaction");
+        toast.error("User Cancelled The Transaction");
       }else{
         toast.error(error.reason || 'Something went wrong try again');
       }
@@ -101,7 +101,7 @@ const useDirectCall = (
       setSellTokenLoading(false);
   
       if(error.code =="ACTION_REJECTED"){
-        toast.error("User Cancelled The Trainsaction");
+        toast.error("User Cancelled The Transaction");
       }else{
         toast.error(error.reason || 'Something went wrong try again');
       }
@@ -131,7 +131,7 @@ const useDirectCall = (
     } catch (error:any) {
      
       if(error.code =="ACTION_REJECTED"){
-        toast.error("User Cancelled The Trainsaction");
+        toast.error("User Cancelled The Transaction");
       }else{
         toast.error(error.reason || 'Something went wrong try again');
       }

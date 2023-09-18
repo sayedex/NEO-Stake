@@ -83,7 +83,7 @@ const useBuytransation = (
       return {isDone:true}
     } catch (error:any) {
       if(error.code =="ACTION_REJECTED"){
-        toast.error("User Cancelled The Trainsaction");
+        toast.error("User Cancelled The Transaction");
       }else{
         toast.error(error.reason || 'Something went wrong try again');
       }
@@ -124,7 +124,7 @@ const useBuytransation = (
       return {isDone:true}
     } catch (error:any) {
       if(error.code =="ACTION_REJECTED"){
-        toast.error("User Cancelled The Trainsaction");
+        toast.error("User Cancelled The Transaction");
       }else{
         toast.error(error.reason || 'Something went wrong try again');
       }
