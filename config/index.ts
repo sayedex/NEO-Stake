@@ -1,9 +1,9 @@
 import { Pool } from "../typeing";
 
 
-export const stakingcontractaddress = "0xa32079d6468121F2cf1487c9572D639F09959a81";
-export const Purchasecontract  = "0xeB6ef6Dc25c26bB4b62534Dc11B2BfF6C02181E7";
-export const NeoBoxcontract = "0x98401Ef9f441f88072F7d13314071D2644Ea38c1";
+export const stakingcontractaddress = "0x3874a935F769865E214eF01f8208b288aDC78b41";
+export const Purchasecontract  = "0x019dE39F63821EF96a4d90d134D41d8EF341987B";
+export const NeoBoxcontract = "0x546D0F819354875D20e136EfF8520418e19cc82e";
 export const rewardNFTuri="ipfs://QmbMCwsznaRRLr4Sy9W8o8NGmE8R2oJTC7P8YFZDFvQgr2/"
 
 export const pools: Pool[] = [
@@ -12,15 +12,16 @@ export const pools: Pool[] = [
     name: "Genesis",
     header: "For 1-5x Holders",
     rate: "0",
-    nftcontract: "0x130471fE74F2d7d305AefC93DF837Af81Cd87237",
+    nftcontract: "0x7F72929DF45fb0a9e4E52274425aadB3CA90bc96",
     totaldeposit: 0,
     yourdeposit: 0,
     unclaimed: "0",
-    limit: false,
+    limit: true,
     headerIMG: "/pool/1.png",
     min: 0,
     max: 0,
-    poolId:3,
+    poolId:0,
+    poolloading:true,
     rewardnft: [
       {
         name: "30% reward nft",
@@ -47,15 +48,16 @@ export const pools: Pool[] = [
     name: "Gold",
     header: "For 1-5x Holders",
     rate: "0",
-    nftcontract: "0x99858CF814fd0f704962c7A81965CaF30326113e",
+    nftcontract: "0x2f8C8c128C27B60A882C4a562926ab7C66440535",
     totaldeposit: 0,
     yourdeposit: 0,
     unclaimed: "0",
-    limit: false,
+    limit: true,
     headerIMG: "/pool/1.png",
     min: 0,
     max: 0,
     poolId:1,
+    poolloading:true,
     rewardnft: [
       {
         name: "Gold reward nft",
@@ -69,15 +71,16 @@ export const pools: Pool[] = [
     name: "Platinum",
     header: "For 1-5x Holders",
     rate: "0",
-    nftcontract: "0xAbc163e962c87127e0c74888B551946e573c0da2",
+    nftcontract: "0x320A98C46C8EC72EF44Ad7c19b46867071a914Af",
     totaldeposit: 0,
     yourdeposit: 0,
     unclaimed: "0",
-    limit: false,
+    limit: true,
     headerIMG: "/pool/1.png",
     min: 0,
     max: 0,
-    poolId:0,
+    poolId:2,
+    poolloading:true,
     rewardnft: [
       {
         name: "Platinum reward nft",
@@ -92,15 +95,16 @@ export const pools: Pool[] = [
     name: "Diamond",
     header: "For 1-5x Holders",
     rate: "0",
-    nftcontract: "0x58da1e55744dB7F3f92F43E226A2F9d5B132a2ba",
+    nftcontract: "0x9056761a3041262BC48070D0D7f66ae474199042",
     totaldeposit: 0,
     yourdeposit: 0,
     unclaimed: "0",
-    limit: false,
+    limit: true,
     headerIMG: "/pool/1.png",
     min: 0,
     max: 0,
-    poolId:2,
+    poolId:3,
+    poolloading:true,
     rewardnft: [
       {
         name: "Diamond reward nft",
@@ -115,28 +119,28 @@ export const pools: Pool[] = [
 
 export const NFT = [
   {
-    nftcontract: "0x130471fE74F2d7d305AefC93DF837Af81Cd87237",
+    nftcontract: "0x7F72929DF45fb0a9e4E52274425aadB3CA90bc96",
     name: "NEO",
     thCID: "QmdBoggjVJi1zhxtxuuzj4GBE8hsb8SNdmjo4BgmKTwx6g",
     CID: "QmdBoggjVJi1zhxtxuuzj4GBE8hsb8SNdmjo4BgmKTwx6g",
     isSame: false,
   },
   {
-    nftcontract: "0xAbc163e962c87127e0c74888B551946e573c0da2",
+    nftcontract: "0x320A98C46C8EC72EF44Ad7c19b46867071a914Af",
     name: "Platinum",
     thCID: "QmNt67zFxvwmCdizcTWtktQ16MxE3rQ6VJWMF8AoQiwc8Q",
     CID: "QmNt67zFxvwmCdizcTWtktQ16MxE3rQ6VJWMF8AoQiwc8Q",
     isSame: true,
   },
   {
-    nftcontract: "0x99858CF814fd0f704962c7A81965CaF30326113e",
+    nftcontract: "0x2f8C8c128C27B60A882C4a562926ab7C66440535",
     name: "Gold",
     thCID: "QmNt67zFxvwmCdizcTWtktQ16MxE3rQ6VJWMF8AoQiwc8Q",
     CID: "QmNt67zFxvwmCdizcTWtktQ16MxE3rQ6VJWMF8AoQiwc8Q",
     isSame: true,
   },
   {
-    nftcontract: "0x58da1e55744dB7F3f92F43E226A2F9d5B132a2ba",
+    nftcontract: "0x9056761a3041262BC48070D0D7f66ae474199042",
     name: "Diamond",
     thCID: "QmNt67zFxvwmCdizcTWtktQ16MxE3rQ6VJWMF8AoQiwc8Q",
     CID: "QmNt67zFxvwmCdizcTWtktQ16MxE3rQ6VJWMF8AoQiwc8Q",

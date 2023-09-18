@@ -51,7 +51,7 @@ export const GetallNFTBYwallet = createAsyncThunk(
     const finalUrl = `${baseUrl}?${queryParams}`;
     const output = await axios.get(finalUrl, options);
     const nftArrayFromAPI = output.data.result;
-    return nftArrayFromAPI;
+    return {nftArrayFromAPI,single};
   }
 );
 

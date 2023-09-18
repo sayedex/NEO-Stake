@@ -8,6 +8,7 @@ type Props = {
 };
 
 export function Deposit({ text, value,load }: Props) {
+
   
   return (
     <div className="flex flex-row items-center gap-3 justify-between">

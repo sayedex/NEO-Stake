@@ -54,10 +54,15 @@ const Poolslice = createSlice({
         console.log(action.payload);
       }),
       builder
-        .addCase(getSinglepool.pending, (state) => {})
+        .addCase(getSinglepool.pending, (state,action) => {
+          const poolID = action.meta.arg.ID;
+          state.pools[poolID].poolloading = true
+        })
         .addCase(getSinglepool.fulfilled, (state, action) => {
           const { updatedPool, poolID } = action.payload;
           state.pools[poolID] = updatedPool;
+          state.pools[poolID].poolloading = false
+  
         })
 
         .addCase(getSinglepool.rejected, (state, action) => {

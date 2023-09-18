@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import toast from "react-hot-toast";
+import { ToastContainer, toast } from "react-toastify";
 import { useAppSelector, useAppdispatch } from "../hooks/redux";
 import { useRouter } from "next/router";
 import { filterNFTsForStake } from "../utils/Contracthelper";
@@ -20,7 +20,7 @@ import { pools, stakingcontractaddress } from "../config/index";
 function SelectNFTs({}: Props) {
   const dispatch = useAppdispatch();
   const router = useRouter();
-  const { nftbalance, loading, stakedtoken, stakeLoad } = useAppSelector(
+  const { poolnftbalance, loading, stakedtoken, stakeLoad } = useAppSelector(
     (state) => state.wallet
   );
   const { pools, usersellectedID } = useAppSelector((state) => state.pool);
@@ -30,7 +30,7 @@ function SelectNFTs({}: Props) {
 
   const load = isStake ? loading : stakeLoad;
   const { data: library } = useSigner();
-  const balance = isStake ? nftbalance : stakedtoken;
+  const balance = isStake ? poolnftbalance : stakedtoken;
 
   const { address } = useAccount();
 
@@ -89,52 +89,33 @@ function SelectNFTs({}: Props) {
   //stake
   const BatchStake = async () => {
     if (!address) return;
-    const stakedbalance = stakedtoken.length;
-
-    if (limit && stakedbalance < min) {
-      if (usersellectedID.length >= min && usersellectedID.length <= max) {
+    //run those mint without any conditions..
+    if (usersellectedID.length > 0) {
+      // run limit condition
+      if (limit && usersellectedID.length <= max) {
         HandleRun(
           "stake",
-          [poolId,usersellectedID],
+          [poolId, usersellectedID],
           "staked",
           usersellectedID.length
         ).then((e) => {
-          dispatch(getSinglepool({ user: address, ID: Number(id) }));
-          dispatch(
-            GetallNFTBYwallet({
-              user: address,
-              nftaddress: nftcontract,
-              single: true,
-            })
-          );
-
-          router.push("/");
+          if (e.isDone) {
+            dispatch(getSinglepool({ user: address, ID: Number(id) }));
+            dispatch(
+              GetallNFTBYwallet({
+                user: address,
+                nftaddress: nftcontract,
+                single: true,
+              })
+            );
+            router.push("/");
+          }
         });
       } else {
-        toast.error(`please select between ${min} and ${max} NFT!`);
+        toast.error(`Max stake limit reached!`);
       }
     } else {
-      //run those mint without any conditions..
-      if (usersellectedID.length > 0) {
-        HandleRun(
-          "stake",
-          [poolId,usersellectedID],
-          "staked",
-          usersellectedID.length
-        ).then((e) => {
-          dispatch(getSinglepool({ user: address, ID: Number(id) }));
-          dispatch(
-            GetallNFTBYwallet({
-              user: address,
-              nftaddress: nftcontract,
-              single: true,
-            })
-          );
-          router.push("/");
-        });
-      } else {
-        toast.error(`You should select at least 1 NFT`);
-      }
+      toast.error(`You should select at least 1 NFT`);
     }
   };
 
@@ -142,22 +123,28 @@ function SelectNFTs({}: Props) {
     if (!address) return;
 
     if (usersellectedID.length > 0) {
-      HandleRun(
-        "withdraw",
-        [poolId,usersellectedID],
-        "unstaked",
-        usersellectedID.length
-      ).then((e) => {
-        dispatch(
-          GetallNFTBYwallet({
-            user: address,
-            nftaddress: nftcontract,
-            single: true,
-          })
-        );
-        dispatch(getSinglepool({ user: address, ID: Number(id) }));
-        router.push("/");
-      });
+      if (limit && usersellectedID.length <= max) {
+        HandleRun(
+          "withdraw",
+          [poolId, usersellectedID],
+          "unstaked",
+          usersellectedID.length
+        ).then((e) => {
+          dispatch(getSinglepool({ user: address, ID: Number(id) }));
+          if (e.isDone) {
+            dispatch(
+              GetallNFTBYwallet({
+                user: address,
+                nftaddress: nftcontract,
+                single: true,
+              })
+            );
+            router.push("/");
+          }
+        });
+      } else {
+        toast.error(`Max stake limit reached!`);
+      }
     } else {
       toast.error(`You should select at least 1`);
     }

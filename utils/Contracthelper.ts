@@ -1,8 +1,9 @@
 import { Contract } from '@ethersproject/contracts';
 import StakingABI from "../config/ABI/Staking.json"
-import ercabi from "../config/ABI/erc721.json";
+import ercabi from "../config/ABI/erc20Token.json";
 import buycontract from "../config/ABI/Buycontract.json";
 import erc20 from "../config/ABI/erc20.json"
+import erc721ContractABI from "../config/ABI/erc721.json"
 import { provider } from './providerweb3';
 import { nftdata } from '../typeing';
 import { Listinginfo } from '../typeing';
@@ -24,6 +25,12 @@ export const getNFTContractInstanceforhook = (contractaddress:string,account:any
 	const contract = new Contract(contractaddress, ercabi.abi, library);
 	return contract;
 };
+
+export const getStakeNFTinstance = (contractaddress:string) => {
+	const contract = new Contract(contractaddress, erc721ContractABI.abi, provider);
+	return contract;
+};
+
 
 export const getNeoBoxtokeninstance = (isUsercall:boolean,library?:any) =>{
 	if(isUsercall){

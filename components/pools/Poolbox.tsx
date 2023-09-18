@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Deposit } from "./Deposit";
 import { useRouter } from "next/router";
 import { Pool } from "../../typeing";
@@ -21,27 +21,29 @@ type Props = {
 };
 
 function Poolbox({ data, indx }: Props) {
+
   const dispatch = useAppdispatch();
   const { pools, loading } = useAppSelector((state) => state.pool);
-  const { buymodel, nftbalance } = useAppSelector((state) => state.wallet);
+  const { buymodel, } = useAppSelector((state) => state.wallet);
   const { address } = useAccount();
   const router = useRouter();
   const [model, setmodel] = useState(false);
 
+
   const { data: signer } = useSigner();
-  const { unclaimed, totaldeposit, nftcontract,yourdeposit, rate, rewardnft ,staked,poolId} =
+  const { unclaimed, totaldeposit, nftcontract,yourdeposit,nftBalance, rate,poolloading, rewardnft ,staked,poolId} =
     pools[indx] || {};
 
-  const { name, id, type, typeimg, headerIMG } =
+  
+
+    
+  const { name, id, type, typeimg, headerIMG} =
     data || {};
 
     const IsStaked = (staked?staked:0) >= 0;
     const IsUnstaked = (staked?staked:0) > 0;
 
-  // filter nft length for each box
-  const nftCount = nftbalance?.filter((e) => {
-    return e.token_address.toLowerCase() == nftcontract?.toLowerCase();
-  });
+  
 
   //responsive state
   const isTabletOrMobile = useMediaQuery({ query: "(max-width: 550px)" });
@@ -54,6 +56,8 @@ function Poolbox({ data, indx }: Props) {
   } = useDirectCall(signer, stakingcontractaddress, address, nftcontract);
   //stake
   const stake = () => {
+   if(loading!='done') return;
+
     if (address) {
       const queryParams = {
         id: indx,
@@ -70,6 +74,8 @@ function Poolbox({ data, indx }: Props) {
 
   //unstake
   const unstake = () => {
+    if(loading!='done') return;
+
     if (address) {
       const queryParams = {
         id: indx,
@@ -85,6 +91,7 @@ function Poolbox({ data, indx }: Props) {
   };
 
   const claim = async () => {
+    if(loading!='done') return;
     if (address) {
       if (unclaimed && Number(unclaimed) > 0) {
         claimRewards("claimRewards",[poolId]).then((e) => {
@@ -110,6 +117,9 @@ function Poolbox({ data, indx }: Props) {
   const getSingle = async () => {
     dispatch(getSinglepool({ user: address, ID: indx }));
   };
+
+
+  
 
   return (
     <div className="m-3  p-[.5px] bg_btn_gr whitespace-nowrap    rounded-2xl relative  ">
@@ -142,22 +152,22 @@ function Poolbox({ data, indx }: Props) {
             text={`${
               isTabletOrMobile ? "Eligible NFTs" : "Eligible NFTs to Stake"
             }`}
-            load={loading == "done"}
-            value={nftCount ? nftCount.length : 0}
+            load={loading == "done"   && !poolloading}
+            value={nftBalance ? nftBalance : 0}
           />
 
           <Deposit
             text={`${
               isTabletOrMobile ? "Staked" : "Total NFTs Currently Staked"
             }`}
-            load={loading == "done"}
+            load={loading == "done" &&  !poolloading}
             value={yourdeposit ? yourdeposit.length : 0}
           />
           <Deposit
             text={`${
               isTabletOrMobile ? "Per/Day" : "NEOBux Estimated Per/Day"
             }`}
-            load={loading == "done"}
+            load={loading == "done" &&  !poolloading}
             value={rate}
           />
 
@@ -205,6 +215,7 @@ function Poolbox({ data, indx }: Props) {
         <div className="m-4">
           <button
             onClick={() => {
+              if(loading!='done') return;
               setBuymode();
             }}
             className="transition-all px-4 py-2  border w-full rounded-3xl flex sm:flex-initial flex-1 items-center justify-center  text-white  disabled:cursor-not-allowed uppercase"
@@ -212,6 +223,7 @@ function Poolbox({ data, indx }: Props) {
            Purchase
           </button>
         </div>
+
       </div>
     </div>
   );

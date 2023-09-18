@@ -79,14 +79,12 @@ export function Buybox({ data }: Props) {
     if (!address && !listingInfo) return;
     const _amount = Number(listingInfo?.value) * Number(count);
     const amount = await FormatEther(_amount);
-    console.log(amount, "asa");
-
     await SetapproveToken("approve", [Purchasecontract, amount]);
   };
 
   const BuyNft = async () => {
     if (!address && !listingInfo) return;
-    await HandleRun("buyNFT", [tokenId, count],"buy",count);
+    await HandleRun("buyNFT", [tokenId, count],"You have purchased",count);
   };
 
   const CallBlockchian = () => {
@@ -114,7 +112,7 @@ export function Buybox({ data }: Props) {
     <div className="border bg-[#1a1c1f]  border-gray-800 rounded-xl relative hover:bg-secondary-dark h-fit">
       {/* image  */}
       <div className="w-[50vw] md:w-[400px] rounded-2xl p-2">
-       <LazyloadImage src={metadata}/>
+       <LazyloadImage src={metadata} isRound={true}/>
       </div>
       {/* image  */}
 

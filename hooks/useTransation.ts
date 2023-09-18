@@ -5,7 +5,6 @@ import {
 import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { ethers } from "ethers";
-import ercabi from "../config/ABI/erc721.json";
 import { provider } from "../utils/providerweb3";
 
 const useDirectCall = (
@@ -56,10 +55,15 @@ const useDirectCall = (
       });
       setapprove(true);
       setSellTokenLoading(false);
-    } catch (error) {
+    } catch (error:any) {
+      if(error.code =="ACTION_REJECTED"){
+        toast.error("Transaction Cancelled");
+      }else{
+        toast.error(error.reason || 'Something went wrong try again');
+      }
+
       setSellTokenLoading(false);
       console.log(error);
-      toast.error("Something went wrong try again");
       //failed
     }
   };
@@ -92,10 +96,16 @@ const useDirectCall = (
       );
 
       setSellTokenLoading(false);
-    } catch (error) {
+      return {isDone:true}
+    } catch (error:any) {
       setSellTokenLoading(false);
-      console.log(error);
-      toast.error("Something went wrong try again");
+  
+      if(error.code =="ACTION_REJECTED"){
+        toast.error("Transaction Cancelled");
+      }else{
+        toast.error(error.reason || 'Something went wrong try again');
+      }
+      return {isDone:false}
       //failed
     }
   };
@@ -118,10 +128,14 @@ const useDirectCall = (
       
       });
       setSellTokenLoading(false);
-    } catch (error) {
+    } catch (error:any) {
+     
+      if(error.code =="ACTION_REJECTED"){
+        toast.error("Transaction Cancelled");
+      }else{
+        toast.error(error.reason || 'Something went wrong try again');
+      }
       setSellTokenLoading(false);
-      console.log(error);
-      toast.error("Something went wrong try again");
       //failed
     }
   };

@@ -1,1 +1,0 @@
-export const BlockChianTxURL = "https://bscscan.com/tx"

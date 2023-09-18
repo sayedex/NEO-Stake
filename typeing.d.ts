@@ -4,7 +4,7 @@ export interface Pool {
     header: string;
     type?: string;
     rate?: any;
-    nftcontract?: string;
+    nftcontract: string;
     totaldeposit?: any;
     yourdeposit?: any;
     unclaimed?: string;
@@ -16,6 +16,8 @@ export interface Pool {
     rewardnft?:rewardnft[]
     poolId:number,
     staked?:number,
+    nftBalance?:number,
+    poolloading:boolean
   }
 
   export type rewardnft = {

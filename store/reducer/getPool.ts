@@ -3,6 +3,7 @@ import { ethers } from "ethers";
 import {
   getContractInstance,
   calculatePerDayReward,
+  getStakeNFTinstance,
 } from "../../utils/Contracthelper";
 import { pools, stakingcontractaddress } from "../../config";
 import { hexToInt } from "../../utils/format";
@@ -34,19 +35,33 @@ export const getALLpool = createAsyncThunk(
           );
           const unclaimed = await ethers.utils.formatUnits(_rewards, 18);
 
+          // get nft contract instance..
+          const NFTinstance = await getStakeNFTinstance(pool.nftcontract);
+          const balanceOFnft = await NFTinstance.balanceOf(parms.user);
+
+          // get user Stake limit 
+          const MaxLimit  = await instance.MaxTx();
+        
+          
+
+
           return {
             ...pool,
             totaldeposit: hexToInt(_totalStaked),
             rate: parseInt(rate),
             yourdeposit: yourDeposit,
             unclaimed: unclaimed,
-            staked:parseInt(_staked.toString())
+            staked: parseInt(_staked.toString()),
+            nftBalance: parseInt(balanceOFnft.toString()),
+            max:parseInt(MaxLimit.toString()),
+            poolloading:false
           };
         } else {
           return {
             ...pool,
             rate: parseInt(rate),
             totaldeposit: hexToInt(_totalStaked),
+            poolloading:false
           };
         }
       });
@@ -83,6 +98,12 @@ export const getSinglepool = createAsyncThunk(
 
     const yourDepositToken = await instance.getStakedTokens(poolID, parms.user);
     const yourDeposit: [] = yourDepositToken.map((e: any) => hexToInt(e));
+    // get nft contract instance..
+    const NFTinstance = await getStakeNFTinstance(pool.nftcontract);
+    const balanceOFnft = await NFTinstance.balanceOf(parms.user);
+
+          // get user Stake limit 
+          const MaxLimit  = await instance.MaxTx();
 
     const updatedPool = {
       ...pool,
@@ -90,9 +111,11 @@ export const getSinglepool = createAsyncThunk(
       totaldeposit: hexToInt(_totalStaked),
       yourdeposit: yourDeposit,
       unclaimed: unclaimed,
-      staked:parseInt(_staked.toString())
-    };
+      staked: parseInt(_staked.toString()),
+      nftBalance: parseInt(balanceOFnft.toString()),
+      max:parseInt(MaxLimit.toString()),
 
+    }
     return { updatedPool, poolID: parms.ID };
   }
 );

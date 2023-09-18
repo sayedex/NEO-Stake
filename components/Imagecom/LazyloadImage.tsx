@@ -3,9 +3,11 @@ import Image from "next/image";
 import SkeletonImage from "./SkeletonImage";
 type Props = {
   src: string; // Assuming src is a string URL
+  height?:number,
+  isRound?:boolean
 };
 
-function LazyloadImage({ src }: Props) {
+function LazyloadImage({ src ,height,isRound}: Props) {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   function handleImageLoad() {
@@ -26,7 +28,7 @@ function LazyloadImage({ src }: Props) {
         // loading="lazy"
         // placeholder="blur"
         // blurDataURL={placeholder.src}
-        className={`w-full h-full  rounded-2xl ${
+        className={`w-full h-full ${isRound && "rounded-2xl"}${
           imageLoaded ? "w-full h-[300px]" : "w-[0px] h-[0px]"
         }`}
         onError={(e: any) => {
@@ -34,7 +36,7 @@ function LazyloadImage({ src }: Props) {
         }}
         onLoadingComplete={handleImageLoad}
       />
-      {!imageLoaded && <SkeletonImage />}
+      {!imageLoaded && <SkeletonImage height={height} />}
     </div>
   );
 }

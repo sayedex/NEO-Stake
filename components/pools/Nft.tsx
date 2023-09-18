@@ -50,11 +50,11 @@ export function Nft({ nft, nftcontract, isStake }: Props) {
   return (
     <div
       onClick={() => AddToken()}
-      className={`transition-all cursor-pointer hover:opacity-60 w-[250px] max-w-full aspect-square bg-black border-[#9061F9]  text-white overflow-hidden ${
+      className={`transition-all cursor-pointer hover:opacity-60 w-[250px] max-w-full   bg-black border-[#9061F9]  text-white overflow-hidden ${
         isSelected && "border-[6px]"
       }`}
     >
-      <LazyloadImage src={metauri}/>
+      <LazyloadImage src={metauri} height={250}/>
     </div>
   );
 }

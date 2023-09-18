@@ -8,19 +8,19 @@ import { nftdata } from "../typeing";
 export interface WalletState {
   loading: "idle" | "pending" | "done" | "error";
   stakeLoad: "idle" | "pending" | "done" | "error";
-  nftbalance: any[];
+  poolnftbalance: any[];
   walletModel: boolean;
-  buymodel:boolean
+  buymodel: boolean;
   stakedtoken: nftdata[];
 }
 
 const initialState: WalletState = {
   loading: "idle",
   stakeLoad: "idle",
-  nftbalance: [],
+  poolnftbalance: [],
   stakedtoken: [],
   walletModel: false,
-  buymodel:false,
+  buymodel: false,
 };
 
 // Define the slice for pools data and token prices
@@ -39,11 +39,12 @@ const walletSlice = createSlice({
       })
       .addCase(GetallNFTBYwallet.fulfilled, (state, action) => {
         state.loading = "done";
-        state.nftbalance = action.payload;
+          state.poolnftbalance = action.payload.nftArrayFromAPI;
+      
       })
       .addCase(GetallNFTBYwallet.rejected, (state, action) => {
         console.log(action.error);
-        
+
         state.loading = "error";
       }),
       builder

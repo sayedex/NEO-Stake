@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import ercabi from "../config/ABI/erc721.json";
 import { provider } from "../utils/providerweb3";
 import { ToastContainer, toast } from "react-toastify";
 import {
@@ -81,10 +80,18 @@ const useBuytransation = (
       toast.success("Successfully Approved");
       CheckApproval();
       setSellTokenLoading(false);
-    } catch (error) {
+      return {isDone:true}
+    } catch (error:any) {
+      if(error.code =="ACTION_REJECTED"){
+        toast.error("Transaction Cancelled");
+      }else{
+        toast.error(error.reason || 'Something went wrong try again');
+      }
+
       setSellTokenLoading(false);
       console.log(error);
-      toast.error("Something went wrong try again");
+      return {isDone:false}
+  
       //failed
     }
   };
@@ -109,15 +116,23 @@ const useBuytransation = (
       const receipt = await response.wait();
 
       toast.success(
-        `Successfully ${type} ${count + (count > 1 ? " nft(s)" : " nft")}!`,
+        `Congratulations! ${type} ${count + (count > 1 ? " nft(s)" : " nft")}!`,
     
       );
 
       setSellTokenLoading(false);
-    } catch (error) {
+      return {isDone:true}
+    } catch (error:any) {
+      if(error.code =="ACTION_REJECTED"){
+        toast.error("Transaction Cancelled");
+      }else{
+        toast.error(error.reason || 'Something went wrong try again');
+      }
+
       setSellTokenLoading(false);
       console.log(error);
-      toast.error("Something went wrong try again");
+      return {isDone:false}
+  
       //failed
     }
   };

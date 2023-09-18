@@ -16,12 +16,10 @@ const Layout = (props: any) => {
   useEffect(() => {
     if (address !== null && address !== undefined) {
       dispatch(getALLpool({ user: address }));
-      dispatch(
-        GetallNFTBYwallet({ user: address, nftaddress: NFT, single: false })
-      );
     } else {
       dispatch(getALLpool({ user: address }));
     }
+
   }, [address]);
 
 
