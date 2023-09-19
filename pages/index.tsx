@@ -15,9 +15,8 @@ import { Header } from "../components/Header/Header";
 import { wrapper } from "../store/store";
 import { getALLpool } from "../store/reducer/getPool";
 
-
 export default function Home(pros: any) {
-  const { pools, loading } = useAppSelector((state) => state.pool);
+  const { loading } = useAppSelector((state) => state.pool);
   const { address } = useAccount();
   const dispatch = useAppdispatch();
 
@@ -29,9 +28,9 @@ export default function Home(pros: any) {
     }
   };
 
-  const IsLoad = loading == "pending";
 
   return (
+    <div>
     <div className="dark:bg-[#12121200] m-auto w-full relative ">
       <div className="flex flex-wrap justify-center gap-5 m-auto w-full pb-32 pt-20 max-w-7xl">
         {pools.map((e: Pool, indx: any) => {
@@ -45,10 +44,10 @@ export default function Home(pros: any) {
           onClick={() => refBalance()}
           className="batchstake esm:h-[38px] esm:w-[160px] esm:text-sm bg-gradient-to-r from-purple-500 to-indigo-600 hover:opacity-50 text-white font-semibold"
         >
-         Refresh balance
-    
+          Refresh balance
         </button>
       </div>
+    </div>
     </div>
   );
 }
