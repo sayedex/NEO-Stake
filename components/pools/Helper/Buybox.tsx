@@ -16,9 +16,10 @@ import { ConvertLink } from "../../../utils/ipfs";
 import LazyloadImage from "../../Imagecom/LazyloadImage";
 type Props = {
   data: rewardnft;
+  closeModal:()=>void
 };
 
-export function Buybox({ data }: Props) {
+export function Buybox({ data ,closeModal}: Props) {
   const { data: library } = useSigner();
   const { address } = useAccount();
   const [count, setCount] = useState(1); // Initial state is 0
@@ -84,7 +85,11 @@ export function Buybox({ data }: Props) {
 
   const BuyNft = async () => {
     if (!address && !listingInfo) return;
-    await HandleRun("buyNFT", [tokenId, count],"You have purchased",count);
+    await HandleRun("buyNFT", [tokenId, count],"You have purchased",count).then((e)=>{
+      if(e.isDone){
+        closeModal();
+      }
+    })
   };
 
   const CallBlockchian = () => {
@@ -136,7 +141,9 @@ export function Buybox({ data }: Props) {
                 />
               </div>
               <div className="font-semibold text-[1rem] text-white">
-                {listingInfo?.value}
+                {listingInfo?.value} 
+                <span className="ml-[5px]">NEOBux</span>
+            
               </div>
             </div>
           </div>
@@ -194,7 +201,7 @@ export function Buybox({ data }: Props) {
           >
             {!loading && "Approve"}
             <ScaleLoader
-              height={30}
+       height={25}
               loading={loading}
               color="#ffffff"
               className="text-white"
@@ -210,7 +217,7 @@ export function Buybox({ data }: Props) {
           >
             {!loading && "Buy"}
             <ScaleLoader
-              height={30}
+              height={25}
               loading={loading}
               color="#ffffff"
               className="text-white"

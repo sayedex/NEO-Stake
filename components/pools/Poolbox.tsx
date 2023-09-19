@@ -15,35 +15,38 @@ import { setModel } from "../../store/walletSlice";
 import Link from "next/link";
 import { useMediaQuery } from "react-responsive";
 import { pools, stakingcontractaddress } from "../../config";
+import ScaleLoader from "react-spinners/ScaleLoader";
 type Props = {
   data: Pool;
   indx: number;
 };
 
 function Poolbox({ data, indx }: Props) {
-
   const dispatch = useAppdispatch();
   const { pools, loading } = useAppSelector((state) => state.pool);
-  const { buymodel, } = useAppSelector((state) => state.wallet);
+  const { buymodel } = useAppSelector((state) => state.wallet);
   const { address } = useAccount();
   const router = useRouter();
   const [model, setmodel] = useState(false);
 
-
   const { data: signer } = useSigner();
-  const { unclaimed, totaldeposit, nftcontract,yourdeposit,nftBalance, rate,poolloading, rewardnft ,staked,poolId} =
-    pools[indx] || {};
+  const {
+    unclaimed,
+    totaldeposit,
+    nftcontract,
+    yourdeposit,
+    nftBalance,
+    rate,
+    poolloading,
+    rewardnft,
+    staked,
+    poolId,
+  } = pools[indx] || {};
 
-  
+  const { name, id, type, typeimg, headerIMG } = data || {};
 
-    
-  const { name, id, type, typeimg, headerIMG} =
-    data || {};
-
-    const IsStaked = (staked?staked:0) >= 0;
-    const IsUnstaked = (staked?staked:0) > 0;
-
-  
+  const IsStaked = (staked ? staked : 0) >= 0;
+  const IsUnstaked = (staked ? staked : 0) > 0;
 
   //responsive state
   const isTabletOrMobile = useMediaQuery({ query: "(max-width: 550px)" });
@@ -56,7 +59,7 @@ function Poolbox({ data, indx }: Props) {
   } = useDirectCall(signer, stakingcontractaddress, address, nftcontract);
   //stake
   const stake = () => {
-   if(loading!='done') return;
+    if (loading != "done") return;
 
     if (address) {
       const queryParams = {
@@ -74,7 +77,7 @@ function Poolbox({ data, indx }: Props) {
 
   //unstake
   const unstake = () => {
-    if(loading!='done') return;
+    if (loading != "done") return;
 
     if (address) {
       const queryParams = {
@@ -91,10 +94,10 @@ function Poolbox({ data, indx }: Props) {
   };
 
   const claim = async () => {
-    if(loading!='done') return;
+    if (loading != "done") return;
     if (address) {
       if (unclaimed && Number(unclaimed) > 0) {
-        claimRewards("claimRewards",[poolId]).then((e) => {
+        claimRewards("claimRewards", [poolId]).then((e) => {
           getSingle();
         });
       } else {
@@ -117,9 +120,6 @@ function Poolbox({ data, indx }: Props) {
   const getSingle = async () => {
     dispatch(getSinglepool({ user: address, ID: indx }));
   };
-
-
-  
 
   return (
     <div className="m-3  p-[.5px] bg_btn_gr whitespace-nowrap    rounded-2xl relative  ">
@@ -152,7 +152,7 @@ function Poolbox({ data, indx }: Props) {
             text={`${
               isTabletOrMobile ? "Eligible NFTs" : "Eligible NFTs to Stake"
             }`}
-            load={loading == "done"   && !poolloading}
+            load={loading == "done" && !poolloading}
             value={nftBalance ? nftBalance : 0}
           />
 
@@ -160,14 +160,14 @@ function Poolbox({ data, indx }: Props) {
             text={`${
               isTabletOrMobile ? "Staked" : "Total NFTs Currently Staked"
             }`}
-            load={loading == "done" &&  !poolloading}
+            load={loading == "done" && !poolloading}
             value={yourdeposit ? yourdeposit.length : 0}
           />
           <Deposit
             text={`${
               isTabletOrMobile ? "Per/Day" : "NEOBux Estimated Per/Day"
             }`}
-            load={loading == "done" &&  !poolloading}
+            load={loading == "done" && !poolloading}
             value={rate}
           />
 
@@ -176,7 +176,7 @@ function Poolbox({ data, indx }: Props) {
             <div className="  text-xl text-white">Unclaimed NEOBux</div>
             {loading == "done" ? (
               <div className="text-white text-xl bg-[#3f0349c7] w-fit px-4 py-1 mt-1 ">
-                {formatNumber(Number(unclaimed))} NEO
+                {formatNumber(Number(unclaimed))} NEObux
               </div>
             ) : (
               <Skeleton />
@@ -185,45 +185,59 @@ function Poolbox({ data, indx }: Props) {
           {/* unclaimed reward */}
 
           {/* claim button */}
-        <button
+          <button
             disabled={isLoading}
             onClick={() => claim()}
-            className={`${Number(unclaimed) <= 0?"opacity-20":"opacity-100"} transition-all px-6 py-2  border rounded-3xl flex sm:flex-initial flex-1 items-center justify-center  text-white  disabled:cursor-not-allowed uppercase`}
+            className={`${
+              Number(unclaimed) <= 0 ? "opacity-20" : "opacity-100"
+            } transition-all px-6 py-2  border rounded-3xl flex sm:flex-initial flex-1 items-center justify-center  text-white  disabled:cursor-not-allowed`}
           >
-            {`${isLoading ? "Loading.." : " Claim NEOBux"}`}
+            {!isLoading && "CLAIM NEOBux"}
+            <ScaleLoader
+              height={20}
+              loading={isLoading}
+              color="#ffffff"
+              className="text-white"
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
           </button>
 
           {/* claim button */}
           <div className=" flex flex-col  gap-y-3">
-          <div className="flex flex-wrap justify-center gap-3">
-            {IsStaked &&  (
-              <button onClick={() => stake()} className={`stake_btn ${!IsUnstaked?"w-full":""}`}>
-                STAKE
-              </button>
-            )}
-            {IsUnstaked && (
-              <button onClick={() => unstake()} className={`stake_btn ${!IsStaked?"w-full":""}`}>
-                UnSTAKE
-              </button>
-            )}
+            <div className="flex flex-wrap justify-center gap-3">
+              {IsStaked && (
+                <button
+                  onClick={() => stake()}
+                  className={`stake_btn ${!IsUnstaked ? "w-full" : ""}`}
+                >
+                  STAKE
+                </button>
+              )}
+              {IsUnstaked && (
+                <button
+                  onClick={() => unstake()}
+                  className={`stake_btn ${!IsStaked ? "w-full" : ""}`}
+                >
+                  UnSTAKE
+                </button>
+              )}
+            </div>
           </div>
         </div>
 
-        </div>
-        
         {/* 2nd section */}
         <div className="m-4">
           <button
             onClick={() => {
-              if(loading!='done') return;
+              if (loading != "done") return;
               setBuymode();
             }}
             className="transition-all px-4 py-2  border w-full rounded-3xl flex sm:flex-initial flex-1 items-center justify-center  text-white  disabled:cursor-not-allowed uppercase"
           >
-           Purchase
+            Purchase
           </button>
         </div>
-
       </div>
     </div>
   );

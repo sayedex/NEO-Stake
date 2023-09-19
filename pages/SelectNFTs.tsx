@@ -189,14 +189,6 @@ function SelectNFTs({}: Props) {
         </div>
       </div>
       <div className="w-auto flex flex-col p-5 bg-black/70 backdrop-blur-md rounded-l-[10px] gap-2 fixed bottom-5 right-0">
-        <button
-          onClick={() => {
-            router.push("/");
-          }}
-          className="batchstake bg-[#ff0000] hover:bg-[#8c0b0b] text-white font-semibold"
-        >
-          Cancel
-        </button>
         {approve ? (
           <button
             disabled={isLoading}
@@ -234,6 +226,15 @@ function SelectNFTs({}: Props) {
             )}
           </button>
         )}
+
+        <button
+          onClick={() => {
+            router.push("/");
+          }}
+          className="batchstake bg-[#ff0000] hover:bg-[#8c0b0b] text-white font-semibold"
+        >
+          Cancel
+        </button>
       </div>
     </div>
   );

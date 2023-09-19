@@ -30,7 +30,7 @@ export function BasicBuyModal({ rewardnft, closeModal }: Props) {
           {/* buy box  */}
           <div className="flex flex-wrap justify-center gap-5 m-auto relative md:w-[500px] h-[70vh] overflow-y-scroll mb-5 ">
             {rewardnft?.map((e: rewardnft, indx: any) => {
-              return <Buybox data={e} key={indx}/>;
+              return <Buybox data={e} key={indx} closeModal ={()=>closeModal()}/>;
             })}
           </div>
 
