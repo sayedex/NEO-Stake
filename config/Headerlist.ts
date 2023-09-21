@@ -6,14 +6,14 @@ export const HeaderList = [
       },
       {
         name: "Redeem",
-        link: "/",
-        islink: false,
+        link: "https://coupon.web3catering.com/",
+        islink: true,
       },
       {
        name:"Shop",
-       link: "",
-       islink: false,
-       route:true
+       link: "https://neofilms.movie/store/",
+       islink: true,
+       route:false
       },
     
 ]

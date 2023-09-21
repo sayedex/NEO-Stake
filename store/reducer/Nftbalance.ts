@@ -9,12 +9,14 @@ import {
   getNFTContractInstanceforhook,
 } from "../../utils/Contracthelper";
 
+//hfFDDgyJiGcA93sEfRWQF61kqPD66rc7etsRDlEjjOZxQ3LVNZKMYRyB2Na3vx6f
+
 const options = {
   method: "GET",
   headers: {
     Accept: "application/json",
     "X-API-Key":
-      "hfFDDgyJiGcA93sEfRWQF61kqPD66rc7etsRDlEjjOZxQ3LVNZKMYRyB2Na3vx6f",
+      process.env.NEXT_PUBLIC_moraliskey,
   },
 };
 
