@@ -7,6 +7,76 @@ export const NeoBoxcontract = "0x546D0F819354875D20e136EfF8520418e19cc82e";
 export const rewardNFTuri="ipfs://QmbMCwsznaRRLr4Sy9W8o8NGmE8R2oJTC7P8YFZDFvQgr2/"
 
 export const pools: Pool[] = [
+
+  {
+    id: 0,
+    name: "Diamond",
+    header: "For 1-5x Holders",
+    rate: "0",
+    nftcontract: "0x9056761a3041262BC48070D0D7f66ae474199042",
+    totaldeposit: 0,
+    yourdeposit: 0,
+    unclaimed: "0",
+    limit: true,
+    headerIMG: "/pool/1.png",
+    min: 0,
+    max: 0,
+    poolId:3,
+    poolloading:true,
+    rewardnft: [
+      {
+        name: "Diamond reward nft",
+        cid: "",
+        tokenid: 3,
+        imgName:"DIAMOND"
+      }]
+  },
+  {
+    id: 0,
+    name: "Platinum",
+    header: "For 1-5x Holders",
+    rate: "0",
+    nftcontract: "0x320A98C46C8EC72EF44Ad7c19b46867071a914Af",
+    totaldeposit: 0,
+    yourdeposit: 0,
+    unclaimed: "0",
+    limit: true,
+    headerIMG: "/pool/1.png",
+    min: 0,
+    max: 0,
+    poolId:2,
+    poolloading:true,
+    rewardnft: [
+      {
+        name: "Platinum reward nft",
+        cid: "",
+        tokenid: 5,
+        imgName:"PLATINUM"
+      }]
+  },
+  {
+    id: 0,
+    name: "Gold",
+    header: "For 1-5x Holders",
+    rate: "0",
+    nftcontract: "0x2f8C8c128C27B60A882C4a562926ab7C66440535",
+    totaldeposit: 0,
+    yourdeposit: 0,
+    unclaimed: "0",
+    limit: true,
+    headerIMG: "/pool/1.png",
+    min: 0,
+    max: 0,
+    poolId:1,
+    poolloading:true,
+    rewardnft: [
+      {
+        name: "Gold reward nft",
+        cid: "",
+        tokenid: 4,
+        imgName:"GOLD"
+      }]
+  },
   {
     id: 0,
     name: "Genesis",
@@ -43,76 +113,9 @@ export const pools: Pool[] = [
       },
     ],
   },
-  {
-    id: 0,
-    name: "Gold",
-    header: "For 1-5x Holders",
-    rate: "0",
-    nftcontract: "0x2f8C8c128C27B60A882C4a562926ab7C66440535",
-    totaldeposit: 0,
-    yourdeposit: 0,
-    unclaimed: "0",
-    limit: true,
-    headerIMG: "/pool/1.png",
-    min: 0,
-    max: 0,
-    poolId:1,
-    poolloading:true,
-    rewardnft: [
-      {
-        name: "Gold reward nft",
-        cid: "",
-        tokenid: 4,
-        imgName:"GOLD"
-      }]
-  },
-  {
-    id: 0,
-    name: "Platinum",
-    header: "For 1-5x Holders",
-    rate: "0",
-    nftcontract: "0x320A98C46C8EC72EF44Ad7c19b46867071a914Af",
-    totaldeposit: 0,
-    yourdeposit: 0,
-    unclaimed: "0",
-    limit: true,
-    headerIMG: "/pool/1.png",
-    min: 0,
-    max: 0,
-    poolId:2,
-    poolloading:true,
-    rewardnft: [
-      {
-        name: "Platinum reward nft",
-        cid: "",
-        tokenid: 5,
-        imgName:"PLATINUM"
-      }]
-  },
+ 
 
-  {
-    id: 0,
-    name: "Diamond",
-    header: "For 1-5x Holders",
-    rate: "0",
-    nftcontract: "0x9056761a3041262BC48070D0D7f66ae474199042",
-    totaldeposit: 0,
-    yourdeposit: 0,
-    unclaimed: "0",
-    limit: true,
-    headerIMG: "/pool/1.png",
-    min: 0,
-    max: 0,
-    poolId:3,
-    poolloading:true,
-    rewardnft: [
-      {
-        name: "Diamond reward nft",
-        cid: "",
-        tokenid: 3,
-        imgName:"DIAMOND"
-      }]
-  },
+
 
   // Add more pool objects as needed
 ];

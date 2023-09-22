@@ -92,7 +92,11 @@ export function calculatePerDayReward(
   const secondsInDay = 24 * 60 * 60; // Number of seconds in a day
   const rewardsPerDay =
     (Number(rewardsPerUnitTime) * secondsInDay) / Number(timeUnit);
-  return rewardsPerDay.toFixed(0);
+  if (rewardsPerDay < 1) {
+    return rewardsPerDay.toFixed(2).toString();
+  } else {
+    return rewardsPerDay.toFixed(0).toString();
+  }
 }
 
 // gettig all listing info..

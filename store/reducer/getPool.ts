@@ -42,13 +42,14 @@ export const getALLpool = createAsyncThunk(
           // get user Stake limit 
           const MaxLimit  = await instance.MaxTx();
         
+          console.log(rate);
           
 
 
           return {
             ...pool,
             totaldeposit: hexToInt(_totalStaked),
-            rate: parseInt(rate),
+            rate: (rate),
             yourdeposit: yourDeposit,
             unclaimed: unclaimed,
             staked: parseInt(_staked.toString()),
@@ -59,7 +60,7 @@ export const getALLpool = createAsyncThunk(
         } else {
           return {
             ...pool,
-            rate: parseInt(rate),
+            rate: (rate),
             totaldeposit: hexToInt(_totalStaked),
             poolloading:false
           };
@@ -107,7 +108,7 @@ export const getSinglepool = createAsyncThunk(
 
     const updatedPool = {
       ...pool,
-      rate: parseInt(rate),
+      rate: (rate),
       totaldeposit: hexToInt(_totalStaked),
       yourdeposit: yourDeposit,
       unclaimed: unclaimed,
