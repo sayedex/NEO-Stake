@@ -1,9 +1,12 @@
 import { WagmiConfig, createClient } from "wagmi";
 import { ConnectKitProvider, ConnectKitButton, getDefaultClient } from "connectkit";
-import { bsc,bscTestnet,goerli ,arbitrum,polygonMumbai} from "wagmi/chains";
+import { bsc,bscTestnet,goerli ,arbitrum,polygonMumbai,polygon} from "wagmi/chains";
 
 const alchemyId = process.env.NEXT_PUBLIC_ALCHEMY_ID;
-const chains = [polygonMumbai];
+
+export const isdevsMode= process.env.NODE_ENV == "development";
+
+const chains = [isdevsMode?polygonMumbai:polygon];
 
 export const client = createClient(
     getDefaultClient({

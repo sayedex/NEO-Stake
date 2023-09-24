@@ -11,7 +11,8 @@ module.exports = {
 
   theme: {
     fontFamily: {
-      Rajdhani:['Rajdhani']
+      Rajdhani:['Rajdhani'],
+      Montserrat:["Montserrat"]
       },
 
     screens:{

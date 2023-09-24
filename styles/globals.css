@@ -9,6 +9,10 @@
   font-family: "Rajdhani";
   src: url("../public/fonts/Rajdhani-Regular.ttf");
   }
+  @font-face {
+    font-family: "Montserrat";
+    src: url("../public/fonts/Montserrat-Medium.ttf");
+    }
 
 body {
   background: #110024;

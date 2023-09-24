@@ -8,12 +8,14 @@ import { setModel } from "../store/walletSlice";
 import { truncateAddress } from "../utils/format";
 //type
 import { Pool, Pool as pooltype } from "../typeing";
-import { pools } from "../config";
+import { pools ,poolsDevs} from "../config";
 import Poolbox from "../components/pools/Poolbox";
 //component
 import { Header } from "../components/Header/Header";
 import { wrapper } from "../store/store";
 import { getALLpool } from "../store/reducer/getPool";
+
+import { isdevsMode } from "../utils/Wagmi";
 
 export default function Home(pros: any) {
   const { loading } = useAppSelector((state) => state.pool);
@@ -28,12 +30,14 @@ export default function Home(pros: any) {
     }
   };
 
+  const Pool = isdevsMode?poolsDevs:pools;
+
 
   return (
     <div>
     <div className="dark:bg-[#12121200] m-auto w-full relative ">
       <div className="flex flex-wrap justify-center gap-5 m-auto w-full pb-32 pt-20 max-w-7xl">
-        {pools.map((e: Pool, indx: any) => {
+        {Pool?.map((e: Pool, indx: any) => {
           return <Poolbox data={e} key={indx} indx={indx} />;
         })}
       </div>
