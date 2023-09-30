@@ -154,7 +154,7 @@ export function Buybox({ data ,closeModal}: Props) {
       {/* buySell */}
 
       <div className="flex flex-row items-center justify-center gap-5 m-auto">
-        <div className="incredrementbtn " onClick={() => decrement()}>
+        <div className="incredrementbtn  " onClick={() => decrement()}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

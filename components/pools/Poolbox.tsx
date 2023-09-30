@@ -233,9 +233,9 @@ function Poolbox({ data, indx }: Props) {
               if (loading != "done") return;
               setBuymode();
             }}
-            className="transition-all px-4 py-2  border w-full rounded-3xl flex sm:flex-initial flex-1 items-center justify-center  text-white  disabled:cursor-not-allowed uppercase"
+            className="transition-all text-sm sm:text-lg truncate px-4 py-2  border w-full rounded-3xl flex sm:flex-initial flex-1 items-center justify-center  text-white  disabled:cursor-not-allowed uppercase"
           >
-            Purchase
+            PURCHASE REWARD NFTS
           </button>
         </div>
       </div>

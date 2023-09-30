@@ -1,12 +1,12 @@
 export const HeaderList = [
     {
         name: "Home",
-        link: "https://neofilms.movie/",
-        islink: true,
+        link: "/",
+        islink: false,
       },
       {
         name: "Redeem",
-        link: "https://coupon.web3catering.com/",
+        link: "https://redeem.neofilms.movie/",
         islink: true,
       },
       {

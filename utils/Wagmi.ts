@@ -6,7 +6,7 @@ const alchemyId = process.env.NEXT_PUBLIC_ALCHEMY_ID;
 
 export const isdevsMode= process.env.NODE_ENV == "development";
 
-const chains = [isdevsMode?polygonMumbai:polygon];
+const chains = [isdevsMode?polygonMumbai:polygonMumbai];
 
 export const client = createClient(
     getDefaultClient({

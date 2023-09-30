@@ -1,7 +1,8 @@
 import { Pool } from "../typeing";
 
+//old - 0x3874a935F769865E214eF01f8208b288aDC78b41
+export const stakingcontractaddress = "0x3AeC85EFbf2cE538a2c07EB2B446c7E26F4C7A1D";
 
-export const stakingcontractaddress = "0x3874a935F769865E214eF01f8208b288aDC78b41";
 export const Purchasecontract  = "0x019dE39F63821EF96a4d90d134D41d8EF341987B";
 export const NeoBoxcontract = "0x546D0F819354875D20e136EfF8520418e19cc82e";
 export const rewardNFTuri="ipfs://QmbMCwsznaRRLr4Sy9W8o8NGmE8R2oJTC7P8YFZDFvQgr2/"

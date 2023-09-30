@@ -116,7 +116,7 @@ const useBuytransation = (
       const receipt = await response.wait();
 
       toast.success(
-        `Congratulations! ${type} ${count + (count > 1 ? " nft(s)" : " nft")}!`,
+        `Congratulations! ${type} Reward NFT!`,
     
       );
 
