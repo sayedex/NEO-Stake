@@ -213,7 +213,7 @@ export function Buybox({ data ,closeModal}: Props) {
         {approve && (
           <button
             onClick={() => CallBlockchian()}
-            className="ransition-all w-full h-[44px] bg-[#363636] hover:bg-[#393939] rounded-[10px]"
+            className="ransition-all w-full h-[44px] bg-gradient-to-r font-semibold from-purple-500 to-indigo-600 text-white hover:bg-blue-700 rounded-[10px]"
           >
             {!loading && "Buy"}
             <ScaleLoader
