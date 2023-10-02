@@ -5,12 +5,17 @@ export const HeaderList = [
         islink: false,
       },
       {
+        name: "Stake",
+        link: "https://stake.neofilms.movie/",
+        islink: true,
+      },
+      {
         name: "Redeem",
         link: "https://redeem.neofilms.movie/",
         islink: true,
       },
       {
-       name:"Shop",
+       name:"Store",
        link: "https://neofilms.movie/store/",
        islink: true,
        route:false
