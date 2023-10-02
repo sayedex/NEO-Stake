@@ -52,9 +52,9 @@ export function Popup({ closeModal }: Props) {
 
             <div className="flex flex-col  gap-5 m-auto relative md:w-[500px] h-auto overflow-y-auto mb-5 pt-5 ">
               <ul className=" list-item list-disc 	">
-                {info.map((e) => {
+                {info.map((e:any,indx:number) => {
                   return (
-                    <li className="text-start text-lg ml-[22px] py-2">{e}</li>
+                    <li key={indx} className="text-start text-lg ml-[22px] py-2">{e}</li>
                   );
                 })}
               </ul>

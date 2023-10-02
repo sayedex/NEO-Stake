@@ -13,6 +13,10 @@ export const client = createClient(
       appName: "NEO stake",
       appIcon: "https://family.co/logo.png", // your app's icon, no bigger than 1024x1024px (max. 1MB)
       alchemyId,
-      chains
+      chains,
+      walletConnectOptions:{
+        version:"1"
+      }
+
     }),
   );
