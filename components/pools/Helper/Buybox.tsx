@@ -85,7 +85,7 @@ export function Buybox({ data ,closeModal}: Props) {
 
   const BuyNft = async () => {
     if (!address && !listingInfo) return;
-    await HandleRun("buyNFT", [tokenId, count],"You have purchased",count).then((e)=>{
+    await HandleRun("buyNFT", [tokenId, count],"You have purchased a Reward NFT(s). After verification, it will be airdropped to you.",count).then((e)=>{
       if(e.isDone){
         closeModal();
       }

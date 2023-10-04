@@ -17,6 +17,7 @@ module.exports = {
 
     screens:{
     'esm': {'max': '400px'},
+     "bigPhone":{'max': '700px'},
     'sm': '640px',
     // => @media (min-width: 640px) { ... }
 
@@ -27,6 +28,10 @@ module.exports = {
     // => @media (min-width: 1024px) { ... }
 
     'xl': '1280px',
+    '2xl': '1300px',
+    "bigPc":{'min': '1700px'}
+  
+  
   },
     extend: {
       animation: {

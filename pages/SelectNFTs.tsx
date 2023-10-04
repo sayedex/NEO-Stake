@@ -155,25 +155,30 @@ function SelectNFTs({}: Props) {
   };
 
   return (
-    <div className="h-screen md:h-screen overflow-hidden">
-      <div className="max-w-7xl w-full flex flex-col items-center h-[70vh] gap-5 pb-[80px] overflow-y-scroll border-[#9061F9] m-auto relative border-[8px] bg-black">
-        <div className="flex flex-row flex-wrap flex-auto gap-4 justify-center items-center pt-10 ">
+    <div className="h-screen md:h-screen overflow-hidden relative">
+      <div className="max-w-7xl w-full flex flex-col items-center h-[70vh] gap-5   overflow-y-scroll border-[#9061F9] m-auto relative border-[8px] bg-black">
+        <div className="flex flex-row flex-wrap  flex-auto gap-4 justify-center items-center pt-10 ">
           {load == "done" ? (
             balance.length === 0 ? (
               <p className="font-creepster sm:text-[40px] text-[20px] text-white text-center">
                 {isStake ? "You don't have any NFTs" : "You didn't stake NFTs."}
               </p>
             ) : (
-              balance?.map((e: any, indx: any) => {
-                return (
-                  <Nft
-                    nft={e}
-                    isStake={isStake}
-                    nftcontract={nftcontract}
-                    key={indx}
-                  />
-                );
-              })
+              <div>
+                <div className="flex flex-row flex-wrap flex-auto gap-4 justify-center items-center pt-10">
+                  {balance?.map((e: any, indx: any) => {
+                    return (
+                      <Nft
+                        nft={e}
+                        isStake={isStake}
+                        nftcontract={nftcontract}
+                        key={indx}
+                      />
+                    );
+                  })}
+        
+                </div>
+              </div>
             )
           ) : (
             <div className="flex flex-row justify-center items-center font-creepster sm:text-[30px] text-[20px] text-white">
@@ -186,7 +191,17 @@ function SelectNFTs({}: Props) {
               Please Wait...
             </div>
           )}
+
         </div>
+        {load == "done" && balance.length != 0 && (
+          <div className=" sticky bottom-[-1vh]  max-w-7xl mx-auto bg-black w-full px-2 text-center py-5">
+            <h1 className="text-2xl">{`Please select the NFT(s) you would like to ${
+              isStake ? "stake" : "unstake"
+            }`}</h1>
+          </div>
+        )}
+  
+      
       </div>
       <div className="w-auto flex flex-col p-5 bg-black/70 backdrop-blur-md rounded-l-[10px] gap-2 fixed bottom-5 right-0">
         {approve ? (
@@ -241,3 +256,11 @@ function SelectNFTs({}: Props) {
 }
 
 export default SelectNFTs;
+
+
+
+{/* <div className="fixed top-32  md:right-60  flex justify-center  text-lg  rounded-2xl whitespace-nowrap  bg-gradient-to-r from-blue-500 to-pink-500 ">
+<div className="bg-[#160024] px-3 py-2 m-[2px] rounded-2xl">
+{    `Your Balance : ${Number(Neobalance).toFixed(3)} NEObux`}
+</div>
+</div> */}

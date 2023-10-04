@@ -18,7 +18,7 @@ import { getALLpool } from "../store/reducer/getPool";
 import { isdevsMode } from "../utils/Wagmi";
 
 export default function Home(pros: any) {
-  const { loading } = useAppSelector((state) => state.pool);
+  const { loading ,Neobalance} = useAppSelector((state) => state.pool);
   const { address } = useAccount();
   const dispatch = useAppdispatch();
 
@@ -51,6 +51,15 @@ export default function Home(pros: any) {
           Refresh balance
         </button>
       </div>
+      <div className="fixed bigPhone:right-10 bigPhone:top-24 top-32 md:right-[5vw]  bigPc:right-[18vw]">
+    <div className="flex  justify-center text-lg w-fit rounded-2xl whitespace-nowrap  bg-gradient-to-r from-blue-500 to-pink-500">
+        <div className="bg-[#160024]  px-3 py-2 m-[2px] rounded-2xl">
+            <h1 className="break-all bigPhone:text-sm">
+                {`Your Balance : ${Number(Neobalance).toFixed(3)} NEObux`}
+            </h1>
+        </div>
+    </div>
+</div>
     </div>
     </div>
   );

@@ -56,10 +56,10 @@ export function Header() {
 
   return (
     <header
-      className={`mx-auto ${
-        openNav ? "pb-5" : ""
-      } border-b items-center border-blue-500 max-w-screen-xl  md:py-2 px-4 lg:px-8 lg:py-4 bg-transparent sticky top-[0px] backdrop-blur-md z-[100] `}
-    >
+    className={`mx-auto ${
+      openNav ? "pb-5" : ""
+    } border-b items-center border-blue-500 max-w-screen-xl z-50  md:py-2 px-4 lg:px-8 lg:py-4 bg-transparent sticky top-[0px] backdrop-blur-md  `}
+  >
       <div className="container mx-auto flex items-center  justify-between text-blue-gray-900">
       <a
           href="https://neofilms.movie/"

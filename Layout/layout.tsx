@@ -32,7 +32,7 @@ const Layout = (props: any) => {
 
   
   return (
-    <>
+    < >
       <Header />
    {popup && <Popup closeModal={()=>setpopup(false)}/>}
       {props.children}

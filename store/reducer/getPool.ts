@@ -4,6 +4,8 @@ import {
   getContractInstance,
   calculatePerDayReward,
   getStakeNFTinstance,
+  getNeoBoxtokeninstance,
+  ConvertEthTonormal
 } from "../../utils/Contracthelper";
 import { pools, stakingcontractaddress } from "../../config";
 import { hexToInt } from "../../utils/format";
@@ -42,7 +44,7 @@ export const getALLpool = createAsyncThunk(
           // get user Stake limit 
           const MaxLimit  = await instance.MaxTx();
         
-          console.log(rate);
+          
           
 
 
@@ -68,7 +70,17 @@ export const getALLpool = createAsyncThunk(
       });
       const updatedPools = await Promise.all(promises);
 
-      return updatedPools;
+      let Tokenbalance;
+
+      if(parms.user){
+        const myContract = await getNeoBoxtokeninstance(false);
+        const currentBalance = await myContract.balanceOf(
+          parms.user);
+           Tokenbalance = ethers.utils.formatEther(currentBalance);
+
+      }
+
+      return {updatedPools,Tokenbalance};
     } catch (e) {
       console.log(e);
       return [];
@@ -117,6 +129,14 @@ export const getSinglepool = createAsyncThunk(
       max:parseInt(MaxLimit.toString()),
 
     }
-    return { updatedPool, poolID: parms.ID };
+    let Tokenbalance;
+    if(parms.user){
+      const myContract = await getNeoBoxtokeninstance(false);
+      const currentBalance = await myContract.balanceOf(
+        parms.user);
+         Tokenbalance = ethers.utils.formatEther(currentBalance);
+    }
+
+    return { updatedPool, poolID: parms.ID ,Tokenbalance};
   }
 );

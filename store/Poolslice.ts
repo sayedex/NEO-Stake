@@ -7,12 +7,14 @@ export interface PoolsState {
   loading: "idle" | "pending" | "done" | "error";
   pools: Pool[];
   usersellectedID: number[];
+  Neobalance:string | undefined,
 }
 
 const initialState: PoolsState = {
   loading: "idle",
   pools: [],
   usersellectedID: [],
+  Neobalance:"" 
 };
 
 // Define the slice for pools data and token prices
@@ -45,9 +47,11 @@ const Poolslice = createSlice({
       .addCase(getALLpool.pending, (state) => {
         state.loading = "pending";
       })
-      .addCase(getALLpool.fulfilled, (state, action) => {
+      .addCase(getALLpool.fulfilled, (state, action:any) => {
         state.loading = "done";
-        state.pools = action.payload;
+        const { updatedPools,Tokenbalance} = (action.payload) || {}
+        state.pools = updatedPools;
+        state.Neobalance = Tokenbalance;
       })
       .addCase(getALLpool.rejected, (state, action) => {
         state.loading = "error";
@@ -59,9 +63,10 @@ const Poolslice = createSlice({
           state.pools[poolID].poolloading = true
         })
         .addCase(getSinglepool.fulfilled, (state, action) => {
-          const { updatedPool, poolID } = action.payload;
+          const { updatedPool, poolID ,Tokenbalance} = action.payload;
           state.pools[poolID] = updatedPool;
-          state.pools[poolID].poolloading = false
+          state.pools[poolID].poolloading = false;
+          state.Neobalance = Tokenbalance;
   
         })
 
