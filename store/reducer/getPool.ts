@@ -70,7 +70,7 @@ export const getALLpool = createAsyncThunk(
       });
       const updatedPools = await Promise.all(promises);
 
-      let Tokenbalance;
+      let Tokenbalance = "0";
 
       if(parms.user){
         const myContract = await getNeoBoxtokeninstance(false);
@@ -129,7 +129,7 @@ export const getSinglepool = createAsyncThunk(
       max:parseInt(MaxLimit.toString()),
 
     }
-    let Tokenbalance;
+    let Tokenbalance = "0";
     if(parms.user){
       const myContract = await getNeoBoxtokeninstance(false);
       const currentBalance = await myContract.balanceOf(

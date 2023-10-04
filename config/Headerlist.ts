@@ -1,8 +1,8 @@
 export const HeaderList = [
     {
         name: "Home",
-        link: "/",
-        islink: false,
+        link: "https://neofilms.movie/",
+        islink: true,
       },
       {
         name: "Stake",

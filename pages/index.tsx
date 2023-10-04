@@ -55,7 +55,7 @@ export default function Home(pros: any) {
     <div className="flex  justify-center text-lg w-fit rounded-2xl whitespace-nowrap  bg-gradient-to-r from-blue-500 to-pink-500">
         <div className="bg-[#160024]  px-3 py-2 m-[2px] rounded-2xl">
             <h1 className="break-all bigPhone:text-sm">
-                {`Your Balance : ${Number(Neobalance).toFixed(3)} NEObux`}
+                {`Your Balance : ${address?Number(Neobalance).toFixed(3):0} NEObux`}
             </h1>
         </div>
     </div>
