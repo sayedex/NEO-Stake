@@ -17,7 +17,7 @@ module.exports = {
 
     screens:{
     'esm': {'max': '400px'},
-     "bigPhone":{'max': '700px'},
+     'bigPhone':{'max': '770px'},
     'sm': '640px',
     // => @media (min-width: 640px) { ... }
 
@@ -26,7 +26,7 @@ module.exports = {
 
     'lg': '1024px',
     // => @media (min-width: 1024px) { ... }
-
+    'sxl':{'max': '1020px'},
     'xl': '1280px',
     '2xl': '1300px',
     "bigPc":{'min': '1700px'}

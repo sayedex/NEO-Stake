@@ -36,7 +36,7 @@ export default function Home(pros: any) {
   return (
     <div>
     <div className="dark:bg-[#12121200] m-auto w-full relative ">
-      <div className="flex flex-wrap justify-center gap-5 m-auto w-full pb-32 pt-20 max-w-7xl">
+      <div className="flex flex-wrap justify-center gap-5 m-auto w-full pb-36 pt-24 max-w-7xl">
         {Pool?.map((e: Pool, indx: any) => {
           return <Poolbox data={e} key={indx} indx={indx} />;
         })}
@@ -51,7 +51,7 @@ export default function Home(pros: any) {
           Refresh balance
         </button>
       </div>
-      <div className="fixed bigPhone:right-10 bigPhone:top-24 top-32 md:right-[5vw]  bigPc:right-[18vw]">
+      <div className="fixed bigPhone:right-0 bigPhone:left-0  flex justify-center bigPhone:top-[6rem] top-[8rem] sxl:top-[7rem] xl:top-32 md:right-[5vw]  bigPc:right-[18vw]">
     <div className="flex  justify-center text-lg w-fit rounded-2xl whitespace-nowrap  bg-gradient-to-r from-blue-500 to-pink-500">
         <div className="bg-[#160024]  px-3 py-2 m-[2px] rounded-2xl">
             <h1 className="break-all bigPhone:text-sm">
