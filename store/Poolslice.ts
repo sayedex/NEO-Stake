@@ -49,7 +49,9 @@ const Poolslice = createSlice({
       })
       .addCase(getALLpool.fulfilled, (state, action:any) => {
         state.loading = "done";
-        const { updatedPools,Tokenbalance} = (action.payload) || {}
+        const { updatedPools,Tokenbalance} = (action.payload) || {};
+        console.log(updatedPools);
+        
         state.pools = updatedPools;
         state.Neobalance = Tokenbalance;
       })
