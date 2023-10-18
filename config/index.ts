@@ -1,14 +1,31 @@
 import { Pool } from "../typeing";
 //old - 0x3874a935F769865E214eF01f8208b288aDC78b41
 // old- 0x3AeC85EFbf2cE538a2c07EB2B446c7E26F4C7A1D
+
+//mainnet
 export const stakingcontractaddress = "0xb554d8F9E9c19D7F5b894471392fdbFBFA679C13";
+
+//tesnet 
+//export const stakingcontractaddress = "0x3AeC85EFbf2cE538a2c07EB2B446c7E26F4C7A1D";
 
 //testnet = 0x019dE39F63821EF96a4d90d134D41d8EF341987B
 export const Purchasecontract  = "0x2f8C8c128C27B60A882C4a562926ab7C66440535";
 
+//mainnet
 export const NeoBoxcontract = "0xebdffe2aa7d71e915ddc70777882b55823cff9b5";
+
+//testnet 
+//export const NeoBoxcontract = "0x546D0F819354875D20e136EfF8520418e19cc82e";
+
 export const rewardNFTuri="ipfs://QmbMCwsznaRRLr4Sy9W8o8NGmE8R2oJTC7P8YFZDFvQgr2/"
 
+
+//dim 0xDA41aa572c7A38c2F245655F535efc1e02267f62
+
+
+//test : 0xa84a6c745cc6482c7e89dfd6d775B761631faF4D
+
+//mainnet 
 export const pools: Pool[] = [
 
   {
@@ -126,9 +143,7 @@ export const pools: Pool[] = [
 
 
 //devs mode
-
-
-export const poolsDevs: Pool[] = [
+export const poolsAA: Pool[] = [
 
   {
     id: 0,
@@ -243,6 +258,7 @@ export const poolsDevs: Pool[] = [
 ];
 
 
+//mainnet
 export const NFT = [
   {
     nftcontract: "0xe7d05a668EB20256B1bd4836299E21Fa6d92c206",
@@ -274,8 +290,8 @@ export const NFT = [
   },
 ];
 
-
-export const NFT_TESTNET = [
+//tesnet
+export const NFT_A = [
   {
     nftcontract: "0x7F72929DF45fb0a9e4E52274425aadB3CA90bc96",
     name: "NEO",
@@ -298,7 +314,7 @@ export const NFT_TESTNET = [
     isSame: true,
   },
   {
-    nftcontract: "0x9056761a3041262BC48070D0D7f66ae474199042",
+    nftcontract: "0xDA41aa572c7A38c2F245655F535efc1e02267f62",
     name: "Diamond",
     thCID: "QmNt67zFxvwmCdizcTWtktQ16MxE3rQ6VJWMF8AoQiwc8Q",
     CID: "QmNt67zFxvwmCdizcTWtktQ16MxE3rQ6VJWMF8AoQiwc8Q",

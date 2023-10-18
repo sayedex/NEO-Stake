@@ -21,12 +21,12 @@ export function Nft({ nft, nftcontract, isStake }: Props) {
   const [metauri, setmetauri] = useState("");
   const [imgload, setimgload] = useState(false);
   const { usersellectedID } = useAppSelector((state) => state.pool);
-  const metadata = isStake ? JSON.parse(nft.metadata) : nft;
+  // const metadata = isStake ? JSON.parse(nft.metadata) : nft;
 
-  const isSelected = usersellectedID.includes(Number(nft.token_id));
+  const isSelected = usersellectedID.includes(Number(nft.tokenId));
 
   const AddToken = () => {
-    dispatch(AddID(Number(nft.token_id)));
+    dispatch(AddID(Number(nft.tokenId)));
   };
 
 
@@ -35,13 +35,14 @@ export function Nft({ nft, nftcontract, isStake }: Props) {
       return e.nftcontract == nftcontract;
     });
     const firstFilteredObject = getNftstate[0];
+
     const { CID, isSame, thCID, name } = firstFilteredObject;
     if (firstFilteredObject) {
       if (isStake) {
-        const url = ConvertCID(CID, isSame ? name : nft.token_id);
+        const url = ConvertCID(CID, isSame ? name : nft.tokenId);
         setmetauri(url);
       } else {
-        const url = ConvertCID(thCID, isSame ? name : nft.token_id);
+        const url = ConvertCID(thCID, isSame ? name : nft.tokenId);
         setmetauri(url);
       }
     }

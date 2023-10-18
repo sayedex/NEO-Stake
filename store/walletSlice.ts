@@ -44,7 +44,6 @@ const walletSlice = createSlice({
       })
       .addCase(GetallNFTBYwallet.rejected, (state, action) => {
         console.log(action.error);
-
         state.loading = "error";
       }),
       builder

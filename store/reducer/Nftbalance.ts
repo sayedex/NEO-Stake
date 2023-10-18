@@ -27,33 +27,29 @@ export const GetallNFTBYwallet = createAsyncThunk(
   async (
     parms: {
       user: string | null | undefined;
-      nftaddress: any;
-      single: boolean;
+      nftaddress: string;
     },
     { dispatch }
   ) => {
-    const { user, nftaddress, single } = parms;
-    const baseUrl = `https://deep-index.moralis.io/api/v2.2/${user}/nft`;
-    const chain = "polygon";
-    const format = "decimal";
+    const { user, nftaddress } = parms;
+    const baseUrl = `https://polygon-mainnet.g.alchemy.com/nft/v3/${process.env.NEXT_PUBLIC_ALCHEMY_ID}/getNFTsForOwner`;
+    const owner = parms.user;
     const mediaItems = false;
-    const tokenAddresses = single
-      ? [nftaddress]
-      : nftaddress.map((e: any) => e.nftcontract);
+    // const tokenAddresses = single
+    //   ? [nftaddress]
+    //   : nftaddress.map((e: any) => e.nftcontract);
 
     const queryParams = [
-      `chain=${chain}`,
-      `format=${format}`,
-      `media_items=${mediaItems}`,
-      ...tokenAddresses.map(
-        (address: any, index: any) => `token_addresses%5B${index}%5D=${address}`
-      ),
+      `owner=${owner}`,
+      `contractAddresses[]=${nftaddress}`,
+      'withMetadata=true',
+      'pageSize=100'
     ].join("&");
 
     const finalUrl = `${baseUrl}?${queryParams}`;
-    const output = await axios.get(finalUrl, options);
-    const nftArrayFromAPI = output.data.result;
-    return {nftArrayFromAPI,single};
+    const output = await axios.get(finalUrl, options); 
+    const nftArrayFromAPI = output.data.ownedNfts;
+    return {nftArrayFromAPI};
   }
 );
 
@@ -79,7 +75,7 @@ export const getStakedTokens = createAsyncThunk(
     });
 
     const yourDeposit = yourDepositToken.map((e: any) => ({
-      token_id: hexToInt(e),
+      tokenId: hexToInt(e),
       image: `https://dweb.link/ipfs/${getNftstate[0].thCID}/${
         getNftstate[0].isSame ? getNftstate[0].name : hexToInt(e)
       }.png`, // Replace "asas" with the actual image URL or source

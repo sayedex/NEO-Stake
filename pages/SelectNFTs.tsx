@@ -28,6 +28,7 @@ function SelectNFTs({}: Props) {
   const { limit, min, max, nftcontract, poolId } = pools[Number(id)] || {};
   const isStake = parmsStake === "true";
 
+
   const load = isStake ? loading : stakeLoad;
   const { data: library } = useSigner();
   const balance = isStake ? poolnftbalance : stakedtoken;
@@ -59,31 +60,22 @@ function SelectNFTs({}: Props) {
   };
 
   useEffect(() => {
-    if (address) {
+    if (address && nftcontract && isStake) {
       dispatch(
         GetallNFTBYwallet({
           user: address,
           nftaddress: nftcontract,
-          single: true,
+    
         })
       );
     }
   }, [address, nftcontract, Number(id)]);
 
-  const call = () => {
-    if (address) {
-      dispatch(
-        GetallNFTBYwallet({
-          user: address,
-          nftaddress: nftcontract,
-          single: true,
-        })
-      );
-    }
-  };
 
   useEffect(() => {
+   if(!isStake){
     RefetchHelper();
+   }
   }, [address, isStake]);
 
   //stake
@@ -101,13 +93,6 @@ function SelectNFTs({}: Props) {
         ).then((e) => {
           if (e.isDone) {
             dispatch(getSinglepool({ user: address, ID: Number(id) }));
-            dispatch(
-              GetallNFTBYwallet({
-                user: address,
-                nftaddress: nftcontract,
-                single: true,
-              })
-            );
             router.push("/");
           }
         });
@@ -132,13 +117,6 @@ function SelectNFTs({}: Props) {
         ).then((e) => {
           dispatch(getSinglepool({ user: address, ID: Number(id) }));
           if (e.isDone) {
-            dispatch(
-              GetallNFTBYwallet({
-                user: address,
-                nftaddress: nftcontract,
-                single: true,
-              })
-            );
             router.push("/");
           }
         });
