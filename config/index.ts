@@ -143,7 +143,7 @@ export const pools: Pool[] = [
 
 
 //devs mode
-export const poolsAA: Pool[] = [
+export const poolsDevs: Pool[] = [
 
   {
     id: 0,
