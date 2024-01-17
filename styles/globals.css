@@ -2,17 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
 
 @font-face {
   font-family: "Rajdhani";
   src: url("../public/fonts/Rajdhani-Regular.ttf");
-  }
-  @font-face {
-    font-family: "Montserrat";
-    src: url("../public/fonts/Montserrat-Medium.ttf");
-    }
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("../public/fonts/Montserrat-Medium.ttf");
+}
 
 body {
   background: #110024;
@@ -21,60 +20,50 @@ body {
   margin: 0px;
   overflow-x: hidden;
   font-family: "Rajdhani";
-
 }
-html{
-
+html {
 }
 
+@layer components {
+  .AllPading {
+    @apply max-w-7xl m-auto;
+  }
+  .layout {
+    @apply px-5 py-7 md:px-10 md:py-10;
+  }
 
-
-
-@layer components{
-    .AllPading {
-     @apply   max-w-7xl m-auto    
-    }
-    .layout {
-        @apply px-5 py-7 md:px-10 md:py-10  
-      }
-
-	.stake_btn{
-		@apply transition-all sm:w-[150px] hover:opacity-70 font-semibold text-white  sm:h-[44px] w-auto h-auto sm:py-0 py-2 bg-gradient-to-r from-purple-500 to-indigo-600  rounded-[10px] flex sm:flex-initial flex-1 items-center justify-center   disabled:bg-slate-500 disabled:cursor-not-allowed
-	}
-	.batchstake{
-		@apply transition-all w-[180px] h-[44px] bg-[#cbff0f] hover:bg-[#e1ff73] rounded-[10px] flex items-center justify-center   text-black uppercase disabled:bg-slate-500 disabled:cursor-not-allowed
-	}    
+  .stake_btn {
+    @apply transition-all sm:w-[150px] hover:opacity-70 font-semibold text-white  sm:h-[44px] w-auto h-auto sm:py-0 py-2 bg-gradient-to-r from-purple-500 to-indigo-600  rounded-[10px] flex sm:flex-initial flex-1 items-center justify-center   disabled:bg-slate-500 disabled:cursor-not-allowed;
+  }
+  .batchstake {
+    @apply transition-all w-[180px] h-[44px] bg-[#cbff0f] hover:bg-[#e1ff73] rounded-[10px] flex items-center justify-center   text-black uppercase disabled:bg-slate-500 disabled:cursor-not-allowed;
+  }
   .bg_btn_gr {
-    @apply bg-gradient-to-r from-blue-500 to-pink-500
-   }
-   .incredrementbtn{
-    @apply bg-[#2b2b2b] p-1 rounded-lg cursor-pointer hover:scale-125 transition-all	
-
-   }
-     
-
-   
+    @apply bg-gradient-to-r from-blue-500 to-pink-500;
+  }
+  .incredrementbtn {
+    @apply bg-[#2b2b2b] p-1 rounded-lg cursor-pointer hover:scale-125 transition-all;
+  }
 }
 
-html{
-
-    scroll-behavior:smooth !important;
+html {
+  scroll-behavior: smooth !important;
 }
- /* Hide the scrollbar */
- ::-webkit-scrollbar {
-	width: 10px;
-   }
-   
-   /* Add custom scrollbar styles */
-   ::-webkit-scrollbar {
-	 width: 8px;
-	 height: 8px;
-   }
-   
-   ::-webkit-scrollbar-thumb {
-	 background-color: #6b7280;
-	 border-radius: 4px;
-   }
-   ::-webkit-scrollbar-track {
-	 background-color: #3b3837;
-   }
+/* Hide the scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Add custom scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #6b7280;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-track {
+  background-color: #3b3837;
+}

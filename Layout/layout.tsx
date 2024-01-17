@@ -32,12 +32,12 @@ const Layout = (props: any) => {
 
   
   return (
-    < >
+    <div className="">
       <Header />
    {popup && <Popup closeModal={()=>setpopup(false)}/>}
       {props.children}
       {/* <Footer/> */}
-    </>
+    </div>
   );
 };
 

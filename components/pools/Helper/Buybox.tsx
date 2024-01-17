@@ -141,7 +141,7 @@ export function Buybox({ data ,closeModal}: Props) {
                 />
               </div>
               <div className="font-semibold text-[1rem] text-white">
-                {listingInfo?.value} 
+                {listingInfo ? listingInfo?.value:"--"} 
                 <span className="ml-[5px]">NEOBux</span>
             
               </div>

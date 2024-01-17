@@ -17,7 +17,8 @@ export interface Pool {
     poolId:number,
     staked?:number,
     nftBalance?:number,
-    poolloading:boolean
+    poolloading:boolean,
+    isBuynft:boolean
   }
 
   export type rewardnft = {

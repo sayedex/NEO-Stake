@@ -30,6 +30,7 @@ export const pools: Pool[] = [
 
   {
     id: 0,
+    isBuynft:true,
     name: "Diamond",
     header: "For 1-5x Holders",
     rate: "0",
@@ -53,6 +54,7 @@ export const pools: Pool[] = [
   },
   {
     id: 0,
+    isBuynft:true,
     name: "Platinum",
     header: "For 1-5x Holders",
     rate: "0",
@@ -76,6 +78,7 @@ export const pools: Pool[] = [
   },
   {
     id: 0,
+    isBuynft:true,
     name: "Gold",
     header: "For 1-5x Holders",
     rate: "0",
@@ -99,6 +102,7 @@ export const pools: Pool[] = [
   },
   {
     id: 0,
+    isBuynft:false,
     name: "Genesis",
     header: "For 1-5x Holders",
     rate: "0",
@@ -147,6 +151,7 @@ export const poolsDevs: Pool[] = [
 
   {
     id: 0,
+    isBuynft:true,
     name: "Diamond",
     header: "For 1-5x Holders",
     rate: "0",
@@ -170,6 +175,7 @@ export const poolsDevs: Pool[] = [
   },
   {
     id: 0,
+    isBuynft:true,
     name: "Platinum",
     header: "For 1-5x Holders",
     rate: "0",
@@ -193,6 +199,7 @@ export const poolsDevs: Pool[] = [
   },
   {
     id: 0,
+    isBuynft:true,
     name: "Gold",
     header: "For 1-5x Holders",
     rate: "0",
@@ -216,6 +223,7 @@ export const poolsDevs: Pool[] = [
   },
   {
     id: 0,
+    isBuynft:false,
     name: "Genesis",
     header: "For 1-5x Holders",
     rate: "0",

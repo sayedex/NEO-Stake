@@ -5,6 +5,7 @@ import {
   Typography,
   Button,
   IconButton,
+  Collapse
 } from "@material-tailwind/react";
 import logo from "../../public/logo.webp";
 import Logo from "../../public/Logo.png";
@@ -32,7 +33,7 @@ export function Header() {
           <li key={index}>
             {!e.islink ? (
               <Link href={e.link}>
-                <p className="relative flex font-bold items-center gap-2 text-white text-xl cursor-pointer rounded dark:hover:bg-secondary-dark  dark:hover:bg-slate-800 p-4 transition-all">
+                <p className="relative flex font-bold items-center gap-2 text-white text-xl cursor-pointer rounded   dark:hover:bg-slate-800 p-4 transition-all">
                   {e.name}
                 </p>
               </Link>
@@ -41,7 +42,7 @@ export function Header() {
                 href={e.link}
                 target="_blank"
                 rel="noreferrer"
-                className="relative flex font-bold items-center gap-2 text-xl text-white  cursor-pointer rounded dark:hover:bg-secondary-dark  dark:hover:bg-slate-800 p-4 transition-all"
+                className="relative flex font-bold items-center gap-2 text-xl text-white  cursor-pointer rounded  dark:hover:bg-slate-800 p-4 transition-all"
               >
                 {e.name}
               </a>
@@ -121,12 +122,12 @@ export function Header() {
           )}
         </IconButton>
       </div>
-      <MobileNav open={openNav}>
+      <Collapse open={openNav}>
         <div className="container ">
           {navList}
           <ConnectButtonwagmi />
         </div>
-      </MobileNav>
+      </Collapse>
     </header>
   );
 }

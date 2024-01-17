@@ -43,7 +43,7 @@ function Poolbox({ data, indx }: Props) {
     poolId,
   } = pools[indx] || {};
 
-  const { name, id, type, typeimg, headerIMG } = data || {};
+  const { name, id, type, typeimg, headerIMG,isBuynft } = data || {};
 
   const IsStaked = (staked ? staked : 0) >= 0;
   const IsUnstaked = (staked ? staked : 0) > 0;
@@ -227,17 +227,17 @@ function Poolbox({ data, indx }: Props) {
         </div>
 
         {/* 2nd section */}
-        <div className="m-4">
-          <button
+     {   <div className="m-4 h-[45px]">
+        {  <button
             onClick={() => {
               if (loading != "done") return;
               setBuymode();
             }}
-            className="transition-all text-sm sm:text-lg truncate px-4 py-2  border w-full rounded-3xl flex sm:flex-initial flex-1 items-center justify-center  text-white  disabled:cursor-not-allowed uppercase"
+            className={`${isBuynft?"":"opacity-0 hidden"} transition-all  text-sm sm:text-lg truncate px-4 py-2  border w-full rounded-3xl  sm:flex-initial flex-1 items-center justify-center  text-white  disabled:cursor-not-allowed uppercase`}
           >
             PURCHASE REWARD NFTS
-          </button>
-        </div>
+          </button>}
+        </div>}
       </div>
     </div>
   );
